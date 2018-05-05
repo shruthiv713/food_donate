@@ -3,11 +3,11 @@ conn = sqlite3.connect('acms.db')
 
 print("Opened database successfully")
 conn.execute('''CREATE TABLE Availability
-        (AvailID INT PRIMARY KEY NOT NULL,
-         HotelID INT NOT NULL,
+        (AvailID INTEGER PRIMARY KEY AUTOINCREMENT,
+         HotelID INTEGER NOT NULL,
          AvailPeople INT ,
-         AvailTime TIME ,
-         ExpTime TIME NOT NULL,
+         AvailDT DATETIME DEFAULT (datetime('now','localtime')) ,
+         ExpTime DATETIME NOT NULL,
          FOREIGN KEY(HotelID) REFERENCES Hotel(HotelID));''')
 print("Table created successfully");
 
@@ -17,12 +17,12 @@ print("Table created successfully");
 
 print("Opened database successfully")
 conn.execute('''CREATE TABLE OrderPlaced
-        (OrderID INT PRIMARY KEY  NOT NULL,
-         CharityID INT NOT NULL,
-         AvailID INT NOT NULL,
+        (OrderID INTEGER PRIMARY KEY  AUTOINCREMENT,
+         CharityID INTEGER NOT NULL,
+         AvailID INTEGER NOT NULL,
          People INT,
          Used INT,
-         OrderTime TIME,
+         OrderTime DATETIME DEFAULT (datetime('now','localtime')),
          FOREIGN KEY(AvailID) REFERENCES Availability(AvailID),
          FOREIGN KEY(CharityID) REFERENCES Charity(CharityID)
          );''')
