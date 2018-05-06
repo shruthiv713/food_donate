@@ -29,7 +29,7 @@ def addentry():
                     msgDeatils = "Hotel Added successfully"
                     con.commit()
                 if category == 'orphanage':
-                    cur.execute("INSERT INTO Charity (CharityName ,CharityPhone ,CharityMail ,CharityPassword ,HotelAddress)VALUES(?, ?, ?, ? ,?)",(name,mob,mail,psw,address) )
+                    cur.execute("INSERT INTO Charity (CharityName ,CharityPhone ,CharityMail ,CharityPassword ,CharityAddress)VALUES(?, ?, ?, ? ,?)",(name,mob,mail,psw,address) )
                     msgDeatils = "Charity Added successfully"
                     con.commit()
         except:
@@ -51,17 +51,19 @@ def login():
             with sqlite3.connect("acms.db") as con:
                 cur = con.cursor()
                 if category=='hotel':
-                    hp=cur.execute("SELECT HotelPassword from Hotel WHERE HotelMail='{}'".format(mail))
+                    cur.execute("SELECT HotelPassword from Hotel WHERE HotelMail='{}'".format(mail))
+                    hp= cur.fetchone();
                     msgDeatils = "Hotel logged successfully"
-                    if hp==psw:
+                    if hp[0]==psw:
                         return render_template("result.html", msgDeatils=msgDeatils)
                     else:
                         msgDeatils = "Hotel Password incorrect"
                         return render_template("result.html", msgDeatils=msgDeatils)
                 if category == 'orphanage':
-                    hp = cur.execute("SELECT CharityPassword from Charity WHERE CharityMail='{}'".format(mail))
+                    cur.execute("SELECT CharityPassword from Charity WHERE CharityMail='{}'".format(mail))
+                    hp = cur.fetchone();
                     msgDeatils = "Charity logged successfully"
-                    if hp == psw:
+                    if hp[0] == psw:
                         return render_template("result.html", msgDeatils=msgDeatils)
                     else:
                         msgDeatils = "Charity Password incorrect"
