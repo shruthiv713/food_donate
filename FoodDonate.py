@@ -1,5 +1,6 @@
 import sqlite3
 from flask import Flask ,render_template,request
+from flask import session, redirect, url_for, escape
 import smtplib
 from email.mime.text import MIMEText
 smtp_ssl_host = 'smtp.gmail.com' # smtp.mail.yahoo.com
@@ -9,6 +10,7 @@ password = '@donatefood4'
 sender = 'donatefood4@gmail.com'
 
 app = Flask(__name__)
+app.secret_key = "any random string"
 @app.route('/')
 def mainfun():
     return render_template('Login.html')
@@ -107,17 +109,21 @@ def login():
                 if category=='hotel':
                     cur.execute("SELECT HotelPassword from Hotel WHERE HotelMail='{}'".format(mail))
                     hp= cur.fetchone();
-                    msgDeatils = "Hotel logged successfully"
+
                     if hp[0]==psw:
-                        return render_template("result.html", msgDeatils=msgDeatils)
+                        session['mail']=mail
+                        msgDeatils = "Hotel logged successfully"
+                        return redirect(url_for('hotel'))
                     else:
                         msgDeatils = "Hotel Password incorrect"
                         return render_template("result.html", msgDeatils=msgDeatils)
                 if category == 'orphanage':
                     cur.execute("SELECT CharityPassword from Charity WHERE CharityMail='{}'".format(mail))
                     hp = cur.fetchone();
-                    msgDeatils = "Charity logged successfully"
+
                     if hp[0] == psw:
+                        #session['mail'] = mail
+                        msgDeatils = "Charity logged successfully"
                         return render_template("result.html", msgDeatils=msgDeatils)
                     else:
                         msgDeatils = "Charity Password incorrect"
@@ -128,9 +134,32 @@ def login():
         except:
             msgDeatils = "Incorrect email "
             con.rollback()
-        finally:
-            return render_template("result.html",msgDeatils=msgDeatils)
+            return render_template("result.html", msgDeatils=msgDeatils)
             con.close()
+        #finally:
+            #return render_template("result.html",msgDeatils=msgDeatils)
+            #con.close()
+
+
+@app.route('/hotel')
+def hotel():
+    con = sqlite3.connect("acms.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    mail=session['mail']
+    print(mail)
+    cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
+    id = cur.fetchone();
+    cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE HotelID='{}'".format(id[0]))
+    availrows = cur.fetchall();
+    return render_template("HotelHome.html", rows=availrows)
+
+
+
+@app.route('/logout')
+def logout():
+    session.pop('mail', None)
+    return render_template('Login.html')
 
 
 if __name__ == '__main__':
