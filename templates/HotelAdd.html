@@ -204,7 +204,7 @@
             <h1 style="color:white"> Food Donate</h1>
             <div style="width:40%">
   <button class="but">   
-     <a href="Login.html" style="text-decoration: none;color:white">HOME</a>
+     <a href="{{ url_for('hotel') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
                 <button class="but">   
      <a href="Login.html" style="text-decoration: none;color:white">DELETE</a>
@@ -213,12 +213,12 @@
       <a href="Login.html" style="text-decoration: none;color:white">MODIFY</a>
     </button>
                 <button class="but">   
-      <a href="Login.html" style="text-decoration: none;color:white">LOGOUT</a>
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
     </button>
             </div>
             <br>
             <br>
-            <form class="login" action="Login.html" method="POST" name="myform" onsubmit="return validate()">
+            <form class="login" action="{{ url_for('hoteladdentry') }}" method="POST" name="myform" onsubmit="return validate()">
                 <p class="title">Enter Food Details</p>
     <input type="text" name="count" placeholder="Estimated number of people" required autofocus/>
     <br>
