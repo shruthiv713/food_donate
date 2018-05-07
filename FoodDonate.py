@@ -155,6 +155,45 @@ def hotel():
     return render_template("HotelHome.html", rows=availrows)
 
 
+@app.route('/hoteladd')
+def hoteladd():
+    return render_template('HotelAdd.html')
+
+
+@app.route('/hoteladdentry', methods=['POST', 'GET'])
+def hoteladdentry():
+    if request.method == 'POST':
+        try:
+            count = request.form['count']
+            date = request.form['date']
+            mail = session['mail']
+            print(count)
+            print(date)
+            print(mail)
+            #print(mail)
+
+
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
+                id = cur.fetchone();
+                print(id[0])
+                cur.execute("INSERT INTO Availability (HotelID ,AvailPeople ,ExpTime)VALUES(?, ?, ?, ?)",(id[0],count,date))
+
+                #msgDeatils = "Employee Added successfully"
+                con.commit()
+                print("added")
+                return redirect(url_for('hotel'))
+
+        except:
+            msgDeatils = "Insertion Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
+
 
 @app.route('/logout')
 def logout():
