@@ -171,14 +171,18 @@ def hoteladdentry():
             print(date)
             print(mail)
             #print(mail)
+            con = sqlite3.connect("acms.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
+            id = cur.fetchone();
+            print(id[0])
+            con.close()
 
 
             with sqlite3.connect("acms.db") as con:
                 cur = con.cursor()
-                cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
-                id = cur.fetchone();
-                print(id[0])
-                cur.execute("INSERT INTO Availability (HotelID ,AvailPeople ,ExpTime)VALUES(?, ?, ?, ?)",(id[0],count,date))
+                cur.execute("INSERT INTO Availability (HotelID ,AvailPeople ,ExpTime)VALUES(?, ?, ?)",(id[0],count,date))
 
                 #msgDeatils = "Employee Added successfully"
                 con.commit()
