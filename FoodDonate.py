@@ -197,6 +197,49 @@ def hoteladdentry():
         #finally:
 
 
+@app.route('/hoteldelete')
+def hoteldelete():
+    con = sqlite3.connect("acms.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    mail = session['mail']
+    print(mail)
+    cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
+    id = cur.fetchone();
+    cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE HotelID='{}' and AvailID not in (select AvailID from OrderPlaced)".format(id[0]))
+    availrows = cur.fetchall();
+
+    return render_template('HotelDelete.html', rows=availrows)
+
+
+@app.route('/hoteldeleteentry', methods=['POST', 'GET'])
+def hoteldeleteentry():
+    if request.method == 'POST':
+        print("hello")
+        print("**")
+        try:
+            print("hey")
+            number = request.form.getlist("Availid")
+            # print(number[0])
+            # return number[0]
+
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                print("connection done")
+                for i in number:
+                    print(i);
+                    cur.execute("DELETE FROM Availability Where AvailID='{}'".format(i))
+                    #msgDeatils = "Employee deleted successfully"
+                    con.commit()
+                return redirect(url_for('hotel'))
+        except:
+            msgDeatils = "Deletion Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
 
 
 @app.route('/logout')
