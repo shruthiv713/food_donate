@@ -73,22 +73,22 @@
             <h1 style="color:white"> Food Donate</h1>
             <div style="width:40%">
   <button class="but">   
-     <a href="HotelHome.html" style="text-decoration: none;color:white">HOME</a>
+     <a href="{{ url_for('hotel') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
                 <button class="but">   
-     <a href="HotelAdd.html" style="text-decoration: none;color:white">ADD</a>
+     <a href="{{ url_for('hoteladd') }}" style="text-decoration: none;color:white">ADD</a>
     </button>
                 
                 <button class="but">   
       <a href="HotelModify.html" style="text-decoration: none;color:white">MODIFY</a>
     </button>
                 <button class="but">   
-      <a href="Login.html" style="text-decoration: none;color:white">LOGOUT</a>
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
     </button>
             </div>
             <br>
             <div style="background-color:white; width:50%">
-                <form action="" method="POST">
+                <form action="{{ url_for('hoteldeleteentry') }}" method="POST">
                     <br>
                <input type="submit" value="DELETE SELECTED" style="margin-left:35%;">
                <br>
@@ -105,41 +105,16 @@
             </tr>
         </thead>
         <tbody>
+            {% for row in rows %}
             <tr>
-                <td> <input type="checkbox" name="Select" value="1"  />
-                <td>Tiger Nixon</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
+                <td> <input type="checkbox" name="Availid" value="{{row.AvailID}}"  /></td>
+                <td>{{row["AvailID"]}}</td>
+                <td>{{row["AvailPeople"]}}</td>
+                <td>{{row["AvailDT"]}}</td>
+                <td>{{row["ExpTime"]}}</td>
             </tr>      
-            <tr>
-                 <td> <input type="checkbox" name="Select" value="2" />
-                <td>Garrett Winters</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-            </tr>
-            <tr>
-                 <td> <input type="checkbox" name="Select" value="3" />
-                <td>Ashton Cox</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-            </tr>
-            <tr>
-                 <td> <input type="checkbox" name="Select" value="4"/>
-                <td>Cedric Kelly</td>
-                <td>22</td>
-                <td>2012/03/29</td>
-                <td>$433,060</td>
-            </tr>
-            <tr>
-                 <td> <input type="checkbox" name="Select" value="5" />
-                <td>Airi Satou</td>
-                <td>33</td>
-                <td>2008/11/28</td>
-                <td>$162,700</td>
-            </tr>
+
+            {% endfor %}
            
         </tbody>
         <tfoot>
