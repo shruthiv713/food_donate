@@ -240,6 +240,67 @@ def hoteldeleteentry():
         #finally:
 
 
+@app.route('/hotelmodify')
+def hotelmodify():
+    con = sqlite3.connect("acms.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    mail = session['mail']
+    print(mail)
+    cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
+    id = cur.fetchone();
+    cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE HotelID='{}' and AvailID not in (select AvailID from OrderPlaced)".format(id[0]))
+    availrows = cur.fetchall();
+
+    return render_template('HotelModify.html', rows=availrows)
+
+#hotelmodifyrender
+@app.route('/hotelmodifyrender', methods=['POST', 'GET'])
+def hotelmodifyrender():
+    if request.method == 'POST':
+        try:
+            aid = request.form['Availid']
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE AvailID='{}'".format(aid))
+                id,people,dt,et= cur.fetchone();
+                p=str(people)
+                return render_template('HotelModifyForm.html', id=id,people=p,dt=dt,et=et)
+                con.commit()
+
+        except:
+            msgDeatils = "Selection Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
+
+@app.route('/hotelmodifyentry', methods=['POST', 'GET'])
+def hotelmodifyentry():
+    if request.method == 'POST':
+        try:
+            id = request.form['Availid']
+            count = request.form['count']
+            date = request.form['date']
+            print(id)
+            #print(count.type)
+            print(date)
+
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute('''UPDATE Availability SET AvailPeople = ? , ExpTime = ? WHERE AvailID = ?''', (count, date, id))
+                print("updated the table")
+                con.commit()
+                return redirect(url_for('hotel'))
+        except:
+            msgDeatils = "Update Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
 
 
 @app.route('/logout')
