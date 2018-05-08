@@ -73,22 +73,22 @@
             <h1 style="color:white"> Food Donate</h1>
             <div style="width:40%">
   <button class="but">   
-     <a href="HotelHome.html" style="text-decoration: none;color:white">HOME</a>
+     <a href="{{ url_for('hotel') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
                 <button class="but">   
-     <a href="HotelAdd.html" style="text-decoration: none;color:white">ADD</a>
+     <a href="{{ url_for('hoteladd') }}" style="text-decoration: none;color:white">ADD</a>
     </button>
                 
                 <button class="but">   
-      <a href="HotelDelete.html" style="text-decoration: none;color:white">DELETE</a>
+      <a href="{{ url_for('hoteldelete') }}" style="text-decoration: none;color:white">DELETE</a>
     </button>
                 <button class="but">   
-      <a href="Login.html" style="text-decoration: none;color:white">LOGOUT</a>
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
     </button>
             </div>
             <br>
             <div style="background-color:white; width:50%">
-                <form action="" method="POST">
+                <form action="{{ url_for('hotelmodifyrender') }}" method="POST">
                <br>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -102,41 +102,21 @@
             </tr>
         </thead>
         <tbody>
+            {% for row in rows %}
             <tr>
-                <td>Tiger Nixon</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td> <input type="submit" value="MODIFY" name="1" />
-            </tr>      
-            <tr>
-                <td>Garrett Winters</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-                <td> <input type="submit" value="MODIFY" name="2" />
+
+                <td>{{row["AvailID"]}}</td>
+                <td>{{row["AvailPeople"]}}</td>
+                <td>{{row["AvailDT"]}}</td>
+                <td>{{row["ExpTime"]}}</td>
+                <td> <input type="submit" value="{{row.AvailID}}" name="Availid" /></td>
+
             </tr>
-            <tr>
-                <td>Ashton Cox</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-                <td> <input type="submit" value="MODIFY" name="3" />
-            </tr>
-            <tr>
-                <td>Cedric Kelly</td>
-                <td>22</td>
-                <td>2012/03/29</td>
-                <td>$433,060</td>
-                <td> <input type="submit" value="MODIFY" name="4" />
-            </tr>
-            <tr>
-                <td>Airi Satou</td>
-                <td>33</td>
-                <td>2008/11/28</td>
-                <td>$162,700</td>
-                <td> <input type="submit" value="MODIFY" name="5" />
-            </tr>
+            {% endfor %}
+
+
+
+
            
         </tbody>
         <tfoot>
