@@ -13,6 +13,10 @@ app = Flask(__name__)
 app.secret_key = "any random string"
 @app.route('/')
 def mainfun():
+    return render_template('index.html')
+
+@app.route('/log')
+def log():
     return render_template('Login.html')
 
 
@@ -306,7 +310,7 @@ def hotelmodifyentry():
 @app.route('/logout')
 def logout():
     session.pop('mail', None)
-    return render_template('Login.html')
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
