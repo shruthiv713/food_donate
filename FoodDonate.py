@@ -306,6 +306,46 @@ def hotelmodifyentry():
         #finally:
 
 
+@app.route('/hoteledit')
+def hoteledit():
+    con = sqlite3.connect("acms.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    mail = session['mail']
+    print(mail)
+    cur.execute("select * from Hotel WHERE HotelMail='{}'".format(mail))
+    row = cur.fetchone();
+    return render_template('HotelEdit.html', row=row)
+
+
+@app.route('/hoteleditentry', methods=['POST', 'GET'])
+def hoteleditentry():
+    if request.method == 'POST':
+        try:
+            id = request.form['id']
+            name = request.form['name']
+            mail = request.form['mail']
+            mob = request.form['mob']
+            passw = request.form['pass']
+            addr = request.form['addr']
+            print(id)
+
+
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute('''UPDATE Hotel SET HotelName = ? , HotelMail = ? , HotelPhone = ? , HotelPassword = ? , HotelAddress = ? WHERE HotelID = ?''', (name, mail, mob, passw, addr, id))
+                print("updated the table")
+                con.commit()
+                session['mail']=mail
+                return redirect(url_for('hotel'))
+        except:
+            msgDeatils = "Update Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
 
 @app.route('/logout')
 def logout():
