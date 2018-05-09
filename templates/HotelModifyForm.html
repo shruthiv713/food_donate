@@ -151,7 +151,7 @@
 
 .but
 {
-    width: 22%;
+    width: 17%;
     height: 30%;
     padding: 10px 10px;
     margin: 5px;
@@ -202,7 +202,7 @@
     <body>
         <div class="wrapper">
             <h1 style="color:white"> Food Donate</h1>
-            <div style="width:40%">
+            <div style="width:50%">
   <button class="but">   
      <a href="{{ url_for('hotel') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
@@ -211,6 +211,9 @@
     </button>
                 <button class="but">   
       <a href="{{ url_for('hoteldelete') }}" style="text-decoration: none;color:white">DELETE</a>
+    </button>
+		    <button class="but">   
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">EDIT</a>
     </button>
                 <button class="but">   
       <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
