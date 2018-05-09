@@ -126,9 +126,9 @@ def login():
                     hp = cur.fetchone();
 
                     if hp[0] == psw:
-                        #session['mail'] = mail
-                        msgDeatils = "Charity logged successfully"
-                        return render_template("result.html", msgDeatils=msgDeatils)
+                        session['mail'] = mail
+                        #msgDeatils = "Charity logged successfully"
+                        return redirect(url_for('charity'))
                     else:
                         msgDeatils = "Charity Password incorrect"
                         return render_template("result.html", msgDeatils=msgDeatils)
@@ -268,8 +268,8 @@ def hotelmodifyrender():
                 cur = con.cursor()
                 cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE AvailID='{}'".format(aid))
                 id,people,dt,et= cur.fetchone();
-                p=str(people)
-                return render_template('HotelModifyForm.html', id=id,people=p,dt=dt,et=et)
+                #p=str(people)
+                return render_template('HotelModifyForm.html', id=id,people=people,dt=dt,et=et)
                 con.commit()
 
         except:
@@ -311,6 +311,49 @@ def hotelmodifyentry():
 def logout():
     session.pop('mail', None)
     return render_template('index.html')
+
+
+@app.route('/charity')
+def charity():
+    con = sqlite3.connect("acms.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    mail=session['mail']
+    print(mail)
+    cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+    id = cur.fetchone();
+    cur.execute("select OrderID,People,OrderTime,HotelName,Hotel.HotelID,CharityID,ExpTime from Hotel natural join (OrderPlaced natural join Availability) WHERE CharityID='{}'".format(id[0]))
+    orderrows = cur.fetchall();
+    print(orderrows[0]["Hotel.HotelID"])
+    return render_template("CharityHome.html", rows=orderrows)
+
+
+@app.route('/charitymore', methods=['POST', 'GET'])
+def charitymore():
+    if request.method == 'POST':
+        try:
+            hid = request.form['hid']
+            cid = request.form['cid']
+            print(hid)
+            print(cid)
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
+                HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
+                print(HotelName)
+                cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
+                CharityAddress = cur.fetchone();
+                print(CharityAddress)
+                return render_template('CharityMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress)
+                con.commit()
+
+        except:
+            msgDeatils = "Selection Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
 
 
 if __name__ == '__main__':
