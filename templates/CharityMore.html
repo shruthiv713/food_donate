@@ -123,16 +123,16 @@ and open the template in the editor.
        
    <div class="wrapper">
        <h2 style="color:whitesmoke">HOTEL DETAILS</h2>
-       <p style="color: white;font-size:120%">Name: 
+       <p style="color: white;font-size:120%">Name: {{HotelName}}
            
-           <br>Mail:
-           <br>Phone:
-           <br>Address:
+           <br>Mail: {{HotelMail}}
+           <br>Phone: {{HotelPhone}}
+           <br>Address: {{HotelAddress}}
            <br></p>
        <br><input class="but" id="getdir" type="button" value="Get Direction">
-       <input type="hidden" id="to" value="100,Madhava Krishna Street, Erode-638001">
-        <input type="hidden" id="from" value="Narayan Nagar, Salem">
-        <br> <button formaction="CharityHome.html" class="but"><a href="Login.html" style="text-decoration: none;color:white">Back</a></button>
+       <input type="hidden" id="to" value="{{HotelAddress}}">
+        <input type="hidden" id="from" value="{{CharityAddress}}">
+        <br> <button class="but"><a href="{{ url_for('charity') }}" style="text-decoration: none;color:white">Back</a></button>
 
    </div>
    <div id="mapid" style="float:right;margin:.5%;width:49%;height:99%;">
