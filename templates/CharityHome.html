@@ -82,14 +82,14 @@
       <a href="HotelModify.html" style="text-decoration: none;color:white">FEEDBACK</a>
     </button>
                 <button class="but">   
-      <a href="Login.html" style="text-decoration: none;color:white">LOGOUT</a>
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
     </button>
             </div>
             <br>
             <div style="background-color:white; width:60%">
                 <br>
                 <h4 style="text-align:  center"> Order History</h4>
-                <form action="" method="POST">
+                <form action="{{ url_for('charitymore') }}" method="POST">
                
                 
             <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -105,14 +105,16 @@
             </tr>
         </thead>
         <tbody>
+            {% for row in rows %}
             <tr>
-                <td>Tiger Nixon</td>
-                <td>Adayar Anadh Bhavan</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td><input type="submit" value="More" name="3" /></td>
+                <td>{{row["OrderID"]}}</td>
+                <td>{{row["HotelName"]}}</td>
+                <td>{{row["People"]}}</td>
+                <td>{{row["OrderTime"]}}</td>
+                <td>{{row["ExpTime"]}}</td>
+                <td><input type="submit" value="More" name="3" /><input type="hidden" value="{{row.4}}" name="hid" /><input type="hidden" value="{{row.CharityID}}" name="cid" /></td>
             </tr>
+            {% endfor %}
            
         </tbody>
         <tfoot>
