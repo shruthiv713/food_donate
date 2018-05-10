@@ -154,7 +154,7 @@ def hotel():
     print(mail)
     cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
     id = cur.fetchone();
-    cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE HotelID='{}'".format(id[0]))
+    cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime,AvailLeftOut from Availability WHERE HotelID='{}'".format(id[0]))
     availrows = cur.fetchall();
     return render_template("HotelHome.html", rows=availrows)
 
@@ -186,7 +186,7 @@ def hoteladdentry():
 
             with sqlite3.connect("acms.db") as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO Availability (HotelID ,AvailPeople ,ExpTime)VALUES(?, ?, ?)",(id[0],count,date))
+                cur.execute("INSERT INTO Availability (HotelID ,AvailPeople ,ExpTime,AvailLeftOut)VALUES(?, ?, ?, ?)",(id[0],count,date,count))
 
                 #msgDeatils = "Employee Added successfully"
                 con.commit()
@@ -196,7 +196,7 @@ def hoteladdentry():
         except:
             msgDeatils = "Insertion Failed Please check the query / db "
             con.rollback()
-            return render_template("result.html", msgDeatils=msgDeatils)
+            return render_template("result1.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
 
@@ -239,7 +239,7 @@ def hoteldeleteentry():
         except:
             msgDeatils = "Deletion Failed Please check the query / db "
             con.rollback()
-            return render_template("result.html", msgDeatils=msgDeatils)
+            return render_template("result1.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
 
@@ -275,7 +275,7 @@ def hotelmodifyrender():
         except:
             msgDeatils = "Selection Failed Please check the query / db "
             con.rollback()
-            return render_template("result.html", msgDeatils=msgDeatils)
+            return render_template("result1.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
 
@@ -294,14 +294,14 @@ def hotelmodifyentry():
 
             with sqlite3.connect("acms.db") as con:
                 cur = con.cursor()
-                cur.execute('''UPDATE Availability SET AvailPeople = ? , ExpTime = ? WHERE AvailID = ?''', (count, date, id))
+                cur.execute('''UPDATE Availability SET AvailPeople = ? , ExpTime = ? , AvailLeftOut = ? WHERE AvailID = ?''', (count, date, count, id))
                 print("updated the table")
                 con.commit()
                 return redirect(url_for('hotel'))
         except:
             msgDeatils = "Update Failed Please check the query / db "
             con.rollback()
-            return render_template("result.html", msgDeatils=msgDeatils)
+            return render_template("result1.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
 
@@ -341,7 +341,7 @@ def hoteleditentry():
         except:
             msgDeatils = "Update Failed Please check the query / db "
             con.rollback()
-            return render_template("result.html", msgDeatils=msgDeatils)
+            return render_template("result1.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
 
@@ -390,7 +390,7 @@ def charitymore():
         except:
             msgDeatils = "Selection Failed Please check the query / db "
             con.rollback()
-            return render_template("result.html", msgDeatils=msgDeatils)
+            return render_template("result1.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
 
@@ -432,7 +432,7 @@ def charityeditentry():
         except:
             msgDeatils = "Update Failed Please check the query / db "
             #con.rollback()
-            return render_template("result.html", msgDeatils=msgDeatils)
+            return render_template("result1.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
 
