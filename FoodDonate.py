@@ -491,6 +491,133 @@ def charityfeedbackentry():
 
 
 
+@app.route('/charityfind')
+def charityfind():
+    con = sqlite3.connect("acms.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > 0 and ExpTime > datetime('now','localtime')")
+    orderrows = cur.fetchall();
+    #print(orderrows[0]["Hotel.HotelID"])
+    return render_template("CharityFindHotel.html", rows=orderrows)
+
+
+@app.route('/charityfindmore', methods=['POST', 'GET'])
+def charityfindmore():
+    if request.method == 'POST':
+        try:
+            hid = request.form['hid']
+            print(hid)
+            mail = session['mail']
+            print(mail)
+            con = sqlite3.connect("acms.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+            cid = cur.fetchone();
+            print(cid)
+            con.close()
+
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
+                HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
+                print(HotelName)
+                cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
+                CharityAddress = cur.fetchone();
+                print(CharityAddress)
+                return render_template('CharityFindHotelMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress)
+                con.commit()
+
+
+        except:
+            msgDeatils = "Selection Failed Please check the query / db "
+            con.rollback()
+            return render_template("result1.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
+@app.route('/charityfindorder', methods=['POST', 'GET'])
+def charityfindorder():
+    if request.method == 'POST':
+        try:
+            hid = request.form['hid']
+            aid = request.form['aid']
+            print(hid)
+            print(aid)
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress,ExpTime,Availability.AvailID from Availability natural join Hotel WHERE Availability.AvailID='{}'".format(aid))
+                HotelName, HotelPhone, HotelMail, HotelAddress,ExpTime,AvailID= cur.fetchone();
+                print(HotelName)
+
+                return render_template('CharityFindHotelOrder.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, ExpTime=ExpTime, AvailID=AvailID)
+                con.commit()
+
+        except:
+            msgDeatils = "Selection Failed Please check the query / db "
+            con.rollback()
+            return render_template("result1.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
+@app.route('/charityfindorderentry', methods=['POST', 'GET'])
+def charityfindorderentry():
+    if request.method == 'POST':
+        try:
+            aid = request.form['aid']
+            count=request.form['count']
+            print(aid)
+            print(count)
+            mail = session['mail']
+            print(mail)
+            con = sqlite3.connect("acms.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+            cid = cur.fetchone();
+            con.commit()
+            print(cid[0])
+            cur.execute("select AvailLeftOut from Availability WHERE AvailID='{}'".format(aid))
+            apeople = cur.fetchone();
+            con.commit()
+            print(apeople[0])
+
+            print("hello1")
+
+            if int(count)>int(apeople[0]):
+                msgDeatils = "Ordered more than available"
+                return render_template("result.html", msgDeatils=msgDeatils)
+
+            con.close()
+
+            print("hello")
+            with sqlite3.connect("acms.db") as con:
+                print("hey")
+                cur = con.cursor()
+                print("hey")
+
+                cur.execute("INSERT INTO OrderPlaced (CharityID ,AvailID ,People )VALUES(?, ?, ?)",(cid[0],aid,count) )
+                con.commit()
+                print("Order Added successfully")
+                leftout=int(apeople[0])-int(count)
+                print(leftout)
+                cur.execute('''UPDATE Availability SET AvailLeftOut = ?  WHERE AvailID = ?''',(leftout, aid))
+                con.commit()
+                print("Availability updated successfully")
+                return redirect(url_for('charity'))
+
+
+        except:
+            msgDeatils = "Insertion Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
