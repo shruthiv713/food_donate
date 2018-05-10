@@ -24,6 +24,7 @@ conn.execute('''CREATE TABLE OrderPlaced
          People INT,
          Remaining INT,
          OrderTime DATETIME DEFAULT (datetime('now','localtime')),
+         Rating INT,
          FOREIGN KEY(AvailID) REFERENCES Availability(AvailID),
          FOREIGN KEY(CharityID) REFERENCES Charity(CharityID)
          );''')
