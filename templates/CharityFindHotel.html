@@ -73,7 +73,7 @@
             <h1 style="color:white"> Food Donate</h1>
             <div style="width:50%">
                 <button class="but">   
-     <a href="HotelAdd.html" style="text-decoration: none;color:white">HOME</a>
+     <a href="{{ url_for('charity') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
  
                 
@@ -81,20 +81,20 @@
      <a href="HotelDelete.html" style="text-decoration: none;color:white">QUERY</a>
     </button>
                  <button class="but">   
-     <a href="HotelAdd.html" style="text-decoration: none;color:white">FEEDBACK</a>
+     <a href="{{ url_for('charityfeedback') }}" style="text-decoration: none;color:white">FEEDBACK</a>
     </button>
                 <button class="but">   
-      <a href="HotelModify.html" style="text-decoration: none;color:white">EDIT</a>
+      <a href="{{ url_for('charityedit') }}" style="text-decoration: none;color:white">EDIT</a>
     </button>
                 <button class="but">   
-      <a href="Login.html" style="text-decoration: none;color:white">LOGOUT</a>
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
     </button>
             </div>
             <br>
             <div style="background-color:white; width:60%">
                 <br>
                 <h4 style="text-align:  center">Hotels</h4>
-                <form action="" method="POST">
+                <form action="{{url_for('charityfindorder')}}" method="POST">
                
                 
             <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -110,13 +110,15 @@
             </tr>
         </thead>
         <tbody>
+            {% for row in rows %}
             <tr>
-                <td>Adayar Anandh Bhavan</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td><input type="submit" value="More" /></td>
-                <td><input type="submit" value="Order" /></td>
+                <td>{{row["HotelName"]}}</td>
+                <td>{{row["AvailLeftOut"]}}</td>
+                <td>{{row["ExpTime"]}}</td>
+                <td><button type="submit" formaction="{{url_for('charityfindmore')}}">More</button><input type="hidden" value="{{row.4}}" name="hid" /></td>
+                <td><button type="submit">Order</button><input type="hidden" value="{{row.AvailID}}" name="aid"/></td>
             </tr>
+            {% endfor %}
            
         </tbody>
         <tfoot>
