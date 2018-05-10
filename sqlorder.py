@@ -8,6 +8,7 @@ conn.execute('''CREATE TABLE Availability
          AvailPeople INT ,
          AvailDT DATETIME DEFAULT (datetime('now','localtime')) ,
          ExpTime DATETIME NOT NULL,
+         AvailLeftOut INT,
          FOREIGN KEY(HotelID) REFERENCES Hotel(HotelID));''')
 print("Table created successfully");
 
@@ -21,7 +22,7 @@ conn.execute('''CREATE TABLE OrderPlaced
          CharityID INTEGER NOT NULL,
          AvailID INTEGER NOT NULL,
          People INT,
-         Used INT,
+         Remaining INT,
          OrderTime DATETIME DEFAULT (datetime('now','localtime')),
          FOREIGN KEY(AvailID) REFERENCES Availability(AvailID),
          FOREIGN KEY(CharityID) REFERENCES Charity(CharityID)
