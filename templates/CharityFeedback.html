@@ -73,7 +73,7 @@
             <h1 style="color:white"> Food Donate</h1>
             <div style="width:50%">
                 <button class="but">   
-     <a href="HotelAdd.html" style="text-decoration: none;color:white">HOME</a>
+     <a href="{{ url_for('charity') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
   <button class="but">   
      <a href="HotelAdd.html" style="text-decoration: none;color:white">FIND HOTEL</a>
@@ -82,17 +82,17 @@
      <a href="HotelDelete.html" style="text-decoration: none;color:white">QUERY</a>
     </button>
                 <button class="but">   
-      <a href="HotelModify.html" style="text-decoration: none;color:white">EDIT</a>
+      <a href="{{ url_for('charityedit') }}" style="text-decoration: none;color:white">EDIT</a>
     </button>
                 <button class="but">   
-      <a href="Login.html" style="text-decoration: none;color:white">LOGOUT</a>
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
     </button>
             </div>
             <br>
             <div style="background-color:white; width:60%">
                 <br>
                 <h4 style="text-align:  center">Pending Feedbacks</h4>
-                <form action="" method="POST">
+                <form action="{{ url_for('charityfeedbackrender') }}" method="POST">
                
                 
             <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -108,14 +108,16 @@
             </tr>
         </thead>
         <tbody>
+            {% for row in rows %}
             <tr>
-                <td>Tiger Nixon</td>
-                <td>Adayar Anandh Bhavan</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td><input type="submit" value="Feedback" /></td>
+                <td>{{row["OrderID"]}}</td>
+                <td>{{row["HotelName"]}}</td>
+                <td>{{row["People"]}}</td>
+                <td>{{row["OrderTime"]}}</td>
+                <td>{{row["ExpTime"]}}</td>
+                <td><input type="submit" value="Feedback" /><input type="hidden" value="{{row.OrderID}}" name="oid" /></td>
             </tr>
+            {% endfor %}
            
         </tbody>
         <tfoot>
