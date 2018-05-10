@@ -364,7 +364,7 @@ def charity():
     id = cur.fetchone();
     cur.execute("select OrderID,People,OrderTime,HotelName,Hotel.HotelID,CharityID,ExpTime from Hotel natural join (OrderPlaced natural join Availability) WHERE CharityID='{}'".format(id[0]))
     orderrows = cur.fetchall();
-    print(orderrows[0]["Hotel.HotelID"])
+    #print(orderrows[0]["Hotel.HotelID"])
     return render_template("CharityHome.html", rows=orderrows)
 
 
@@ -390,6 +390,48 @@ def charitymore():
         except:
             msgDeatils = "Selection Failed Please check the query / db "
             con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
+@app.route('/charityedit')
+def charityedit():
+    con = sqlite3.connect("acms.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    mail = session['mail']
+    print(mail)
+    cur.execute("select * from Charity WHERE CharityMail='{}'".format(mail))
+    row = cur.fetchone();
+    con.close()
+    return render_template('CharityEdit.html', row=row)
+
+
+
+@app.route('/charityeditentry', methods=['POST', 'GET'])
+def charityeditentry():
+    if request.method == 'POST':
+        try:
+            id = request.form['id']
+            name = request.form['name']
+            mail = request.form['mail']
+            mob = request.form['mob']
+            passw = request.form['pass']
+            addr = request.form['addr']
+            print(id)
+
+
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute('''UPDATE Charity SET CharityName = ? , CharityMail = ? , CharityPhone = ? , CharityPassword = ? , CharityAddress = ? WHERE CharityID = ?''', (name, mail, mob, passw, addr, id))
+                con.commit()
+                print("updated the table")
+                session['mail']=mail
+                return redirect(url_for('charity'))
+        except:
+            msgDeatils = "Update Failed Please check the query / db "
+            #con.rollback()
             return render_template("result.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
