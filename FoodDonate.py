@@ -438,5 +438,59 @@ def charityeditentry():
 
 
 
+@app.route('/charityfeedback')
+def charityfeedback():
+    con = sqlite3.connect("acms.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    mail=session['mail']
+    print(mail)
+    cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+    id = cur.fetchone();
+    cur.execute("select OrderID,People,OrderTime,HotelName,ExpTime from Hotel natural join (OrderPlaced natural join Availability) WHERE CharityID='{}' and Remaining is null".format(id[0]))
+    orderrows = cur.fetchall();
+    #print(orderrows[0]["Hotel.HotelID"])
+    return render_template("CharityFeedback.html", rows=orderrows)
+
+
+
+@app.route('/charityfeedbackrender', methods=['POST', 'GET'])
+def charityfeedbackrender():
+    if request.method == 'POST':
+        oid = request.form['oid']
+        print(oid)
+
+        return render_template('CharityFeedbackForm.html', oid=oid)
+
+
+
+@app.route('/charityfeedbackentry', methods=['POST', 'GET'])
+def charityfeedbackentry():
+    if request.method == 'POST':
+        try:
+            oid = request.form['oid']
+            count = request.form['count']
+            rate = request.form['rate']
+            print(oid)
+            print(count)
+            print(rate)
+
+            with sqlite3.connect("acms.db") as con:
+                cur = con.cursor()
+                cur.execute('''UPDATE OrderPlaced SET Remaining = ? , Rating = ?   WHERE OrderID = ?''', (count, rate, oid))
+                con.commit()
+                print("updated the table")
+
+                return redirect(url_for('charity'))
+        except:
+            msgDeatils = "Update Failed Please check the query / db "
+            #con.rollback()
+            return render_template("result1.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
