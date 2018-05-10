@@ -177,8 +177,8 @@
                 
             
         var pass = document.myform.count.value;
-         var re = /^\d{4}-(0[1-9]|1[0-2])-([0-2]\d|3[01]) ([01]\d|2[0123]):[0-5]\d:[0-5]\d$/;
-         var dt=document.myform.date.value;
+         var re = /^[0-4].[05]|[5].[0]$/;
+         var dt=document.myform.rate.value;
         if(/^[0-9]+$/.test(pass))
         {
             
@@ -190,7 +190,7 @@
         }
         if(!re.test(dt))
         {
-            alert("Please Enter a Valid Date and Time ");
+            alert("Please Enter a Valid Rating ");
             return false;
             
         }
@@ -204,7 +204,7 @@
             <h1 style="color:white"> Food Donate</h1>
             <div style="width:50%">
   <button class="but">   
-     <a href="HotelAdd.html" style="text-decoration: none;color:white">HOME</a>
+     <a href="{{ url_for('charity') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
   <button class="but">   
      <a href="HotelAdd.html" style="text-decoration: none;color:white">FIND HOTEL</a>
@@ -213,25 +213,25 @@
      <a href="HotelDelete.html" style="text-decoration: none;color:white">QUERY</a>
     </button>
                 <button class="but">   
-      <a href="HotelModify.html" style="text-decoration: none;color:white">EDIT</a>
+      <a href="{{ url_for('charityedit') }}" style="text-decoration: none;color:white">EDIT</a>
     </button>
                 <button class="but">   
-      <a href="Login.html" style="text-decoration: none;color:white">LOGOUT</a>
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
     </button>
             </div>
             <br>
             <br>
-            <form class="login" action="Login.html" method="POST" name="myform" style="padding-bottom:20px" onsubmit="return validate()">
+            <form class="login" action="{{ url_for('charityfeedbackentry') }}" method="POST" name="myform" style="padding-bottom:20px" onsubmit="return validate()">
                 <p class="title">Feedback</p>
                 
     Food remaining for*:<br>
     <br>
     <input type="text" name="count" placeholder="Estimated number of people" autofocus/>
     <br>
-    Comment:<br>
+    Rating (out of 5):<br>
     <br>
-     <input type="text"  name="comment"/>
-     <input type="hidden" value="" name="orderid"/>
+     <input type="text"  name="rate" placeholder="0.0"/>
+     <input type="hidden" value="{{oid}}" name="oid"/>
      <input type="submit" value="Submit" style="width: 100%;height: 100%;padding: 10px 10px;background: #2196F3;color: #fff;display: block;  border: none;  margin-top: 20px;  left: 0;  bottom: 0;  max-height: 60px;  border: 0px solid rgba(0, 0, 0, 0.1);  border-radius: 0 0 2px 2px;  transform: rotateZ(0deg);  transition: all 0.1s ease-out;">
      <br>Help us serve you better.
   </form>
