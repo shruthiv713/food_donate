@@ -264,14 +264,14 @@ def hotelmodify():
     return render_template('HotelModify.html', rows=availrows)
 
 #hotelmodifyrender
-@app.route('/hotelmodifyrender', methods=['POST', 'GET'])
-def hotelmodifyrender():
-    if request.method == 'POST':
+@app.route('/hotelmodifyrender<data>')
+def hotelmodifyrender(data):
+
         try:
-            aid = request.form['Availid']
+            #aid = request.form['Availid']
             with sqlite3.connect("acms.db") as con:
                 cur = con.cursor()
-                cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE AvailID='{}'".format(aid))
+                cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE AvailID='{}'".format(data))
                 id,people,dt,et= cur.fetchone();
                 #p=str(people)
                 return render_template('HotelModifyForm.html', id=id,people=people,dt=dt,et=et)
