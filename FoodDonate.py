@@ -373,31 +373,36 @@ def charity():
     return render_template("CharityHome.html", rows=orderrows)
 
 
-@app.route('/charitymore', methods=['POST', 'GET'])
-def charitymore():
-    if request.method == 'POST':
-        try:
-            hid = request.form['hid']
-            cid = request.form['cid']
-            print(hid)
-            print(cid)
-            with sqlite3.connect("acms.db") as con:
-                cur = con.cursor()
-                cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
-                HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
-                print(HotelName)
-                cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
-                CharityAddress = cur.fetchone();
-                print(CharityAddress)
-                return render_template('CharityMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress)
-                con.commit()
+@app.route('/charitymore<hid>')
+def charitymore(hid):
+    try:
+        con = sqlite3.connect("acms.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        mail = session['mail']
+        print(mail)
+        cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+        cid = cur.fetchone();
+        print(hid)
+        print(cid[0])
+        con.close()
+        with sqlite3.connect("acms.db") as con:
+            cur = con.cursor()
+            cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
+            HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
+            print(HotelName)
+            cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid[0]))
+            CharityAddress = cur.fetchone();
+            print(CharityAddress)
+            return render_template('CharityMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress)
+            con.commit()
 
-        except:
-            msgDeatils = "Selection Failed Please check the query / db "
-            con.rollback()
-            return render_template("result1.html", msgDeatils=msgDeatils)
-            con.close()
-        #finally:
+    except:
+        msgDeatils = "Selection Failed Please check the query / db "
+        con.rollback()
+        return render_template("result1.html", msgDeatils=msgDeatils)
+        con.close()
+    #finally:
 
 
 @app.route('/charityedit')
@@ -459,13 +464,9 @@ def charityfeedback():
 
 
 
-@app.route('/charityfeedbackrender', methods=['POST', 'GET'])
-def charityfeedbackrender():
-    if request.method == 'POST':
-        oid = request.form['oid']
-        print(oid)
-
-        return render_template('CharityFeedbackForm.html', oid=oid)
+@app.route('/charityfeedbackrender<oid>')
+def charityfeedbackrender(oid):
+    return render_template('CharityFeedbackForm.html', oid=oid)
 
 
 
@@ -507,65 +508,60 @@ def charityfind():
     return render_template("CharityFindHotel.html", rows=orderrows)
 
 
-@app.route('/charityfindmore', methods=['POST', 'GET'])
-def charityfindmore():
-    if request.method == 'POST':
-        try:
-            hid = request.form['hid']
-            print(hid)
-            mail = session['mail']
-            print(mail)
-            con = sqlite3.connect("acms.db")
-            con.row_factory = sqlite3.Row
+@app.route('/charityfindmore<hid>')
+def charityfindmore(hid):
+    try:
+        print(hid)
+        mail = session['mail']
+        print(mail)
+        con = sqlite3.connect("acms.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+        cid = cur.fetchone();
+        print(cid)
+        con.close()
+
+        with sqlite3.connect("acms.db") as con:
             cur = con.cursor()
-            cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
-            cid = cur.fetchone();
-            print(cid)
-            con.close()
-
-            with sqlite3.connect("acms.db") as con:
-                cur = con.cursor()
-                cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
-                HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
-                print(HotelName)
-                cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
-                CharityAddress = cur.fetchone();
-                print(CharityAddress)
-                return render_template('CharityFindHotelMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress)
-                con.commit()
+            cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
+            HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
+            print(HotelName)
+            cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
+            CharityAddress = cur.fetchone();
+            print(CharityAddress)
+            return render_template('CharityFindHotelMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress)
+            con.commit()
 
 
-        except:
-            msgDeatils = "Selection Failed Please check the query / db "
-            con.rollback()
-            return render_template("result1.html", msgDeatils=msgDeatils)
-            con.close()
-        #finally:
+    except:
+        msgDeatils = "Selection Failed Please check the query / db "
+        con.rollback()
+        return render_template("result1.html", msgDeatils=msgDeatils)
+        con.close()
+    #finally:
 
 
-@app.route('/charityfindorder', methods=['POST', 'GET'])
-def charityfindorder():
-    if request.method == 'POST':
-        try:
-            hid = request.form['hid']
-            aid = request.form['aid']
-            print(hid)
-            print(aid)
-            with sqlite3.connect("acms.db") as con:
-                cur = con.cursor()
-                cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress,ExpTime,Availability.AvailID from Availability natural join Hotel WHERE Availability.AvailID='{}'".format(aid))
-                HotelName, HotelPhone, HotelMail, HotelAddress,ExpTime,AvailID= cur.fetchone();
-                print(HotelName)
+@app.route('/charityfindorder<aid>')
+def charityfindorder(aid):
+    try:
 
-                return render_template('CharityFindHotelOrder.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, ExpTime=ExpTime, AvailID=AvailID)
-                con.commit()
+        print(aid)
+        with sqlite3.connect("acms.db") as con:
+            cur = con.cursor()
+            cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress,ExpTime,Availability.AvailID from Availability natural join Hotel WHERE Availability.AvailID='{}'".format(aid))
+            HotelName, HotelPhone, HotelMail, HotelAddress,ExpTime,AvailID= cur.fetchone();
+            print(HotelName)
 
-        except:
-            msgDeatils = "Selection Failed Please check the query / db "
-            con.rollback()
-            return render_template("result1.html", msgDeatils=msgDeatils)
-            con.close()
-        #finally:
+            return render_template('CharityFindHotelOrder.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, ExpTime=ExpTime, AvailID=AvailID)
+            con.commit()
+
+    except:
+        msgDeatils = "Selection Failed Please check the query / db "
+        con.rollback()
+        return render_template("result1.html", msgDeatils=msgDeatils)
+        con.close()
+    #finally:
 
 
 @app.route('/charityfindorderentry', methods=['POST', 'GET'])
