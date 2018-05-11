@@ -91,7 +91,9 @@
             </div>
             <br>
             <div style="background-color:white; width:50%">
-                <form action="{{ url_for('hotelmodifyrender') }}" method="POST">
+                    <br>
+                    <h4 style="text-align:  center">Modify</h4>
+                
                <br>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -112,7 +114,7 @@
                 <td>{{row["AvailPeople"]}}</td>
                 <td>{{row["AvailDT"]}}</td>
                 <td>{{row["ExpTime"]}}</td>
-                <td><input type="submit" value="{{row.AvailID}}" name="Availid" /></td>
+                <td><button><a href="Login.html" style="text-decoration:none;color:black">MODIFY</a></button></td>
 
             </tr>
             {% endfor %}
@@ -133,7 +135,8 @@
             </tr>
         </tfoot>
             </table>
-                </form>
+               
+                <p><b>Note:</b>You can modify only those records which are not ordered yet.</p>
             </div>
             <br>
   
