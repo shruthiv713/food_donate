@@ -594,7 +594,7 @@ def charityfindorderentry():
 
             if int(count)>int(apeople[0]):
                 msgDeatils = "Ordered more than available"
-                return render_template("result.html", msgDeatils=msgDeatils)
+                return render_template("result1.html", msgDeatils=msgDeatils)
 
             con.close()
 
