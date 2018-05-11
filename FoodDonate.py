@@ -88,16 +88,21 @@ def addentry():
                     cur.execute("INSERT INTO Hotel (HotelName ,HotelPhone ,HotelMail ,HotelPassword ,HotelAddress)VALUES(?, ?, ?, ? ,?)",(name,mob,mail,psw,address) )
                     msgDeatils = "Hotel Added successfully"
                     con.commit()
+                    return redirect(url_for('log'))
                 if category == 'orphanage':
                     cur.execute("INSERT INTO Charity (CharityName ,CharityPhone ,CharityMail ,CharityPassword ,CharityAddress)VALUES(?, ?, ?, ? ,?)",(name,mob,mail,psw,address) )
                     msgDeatils = "Charity Added successfully"
                     con.commit()
+                    return redirect(url_for('log'))
+
+
         except:
             msgDeatils = "Insertion Failed Please check the query / db "
             con.rollback()
-        finally:
-            return render_template("result.html",msgDeatils=msgDeatils)
+            return render_template("result.html", msgDeatils=msgDeatils)
             con.close()
+        #finally:
+
 
 
 @app.route('/login', methods=['POST', 'GET'])
