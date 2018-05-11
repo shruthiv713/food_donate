@@ -517,20 +517,21 @@ def charityfindmore(hid):
         con = sqlite3.connect("acms.db")
         con.row_factory = sqlite3.Row
         cur = con.cursor()
-        cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
-        cid = cur.fetchone();
-        print(cid)
+        cur.execute("select CharityAddress from Charity WHERE CharityMail='{}'".format(mail))
+        CharityAddress = cur.fetchone();
+        #print(cid)
+        print(CharityAddress[0])
         con.close()
 
         with sqlite3.connect("acms.db") as con:
             cur = con.cursor()
             cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
             HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
-            print(HotelName)
-            cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
-            CharityAddress = cur.fetchone();
-            print(CharityAddress)
-            return render_template('CharityFindHotelMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress)
+            print(HotelAddress)
+            #cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
+            #CharityAddress = cur.fetchone();
+            #print(CharityAddress)
+            return render_template('CharityFindHotelMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress[0])
             con.commit()
 
 
