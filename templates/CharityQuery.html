@@ -188,11 +188,15 @@
             alert("Please Enter a Valid Number ");
             return false;
         }
-        if(!re.test(dt))
+        if(!re.test(dt)&&dt!="")
         {
             alert("Please Enter a Valid Date and Time ");
             return false;
-            
+
+        }
+        else if(dt=="")
+        {
+            document.myform.date.value="null";
         }
         return true;
     }
@@ -204,24 +208,24 @@
             <h1 style="color:white"> Food Donate</h1>
             <div style="width:50%">
   <button class="but">   
-     <a href="HotelAdd.html" style="text-decoration: none;color:white">HOME</a>
+     <a href="{{ url_for('charity') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
   <button class="but">   
-     <a href="HotelAdd.html" style="text-decoration: none;color:white">FIND HOTEL</a>
+     <a href="{{ url_for('charityfind') }}" style="text-decoration: none;color:white">FIND HOTEL</a>
     </button>
                 <button class="but">   
-     <a href="HotelDelete.html" style="text-decoration: none;color:white">FEEDBACK</a>
+     <a href="{{ url_for('charityfeedback') }}" style="text-decoration: none;color:white">FEEDBACK</a>
     </button>
                 <button class="but">   
-      <a href="HotelModify.html" style="text-decoration: none;color:white">EDIT</a>
+      <a href="{{ url_for('charityedit') }}" style="text-decoration: none;color:white">EDIT</a>
     </button>
                 <button class="but">   
-      <a href="Login.html" style="text-decoration: none;color:white">LOGOUT</a>
+      <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
     </button>
             </div>
             <br>
             <br>
-            <form class="login" action="Login.html" method="POST" name="myform" style="padding-bottom:20px" onsubmit="return validate()">
+            <form class="login" action="{{ url_for('charityqueryresult') }}" method="POST" name="myform" style="padding-bottom:20px" onsubmit="return validate()">
                 <p class="title">Query</p>
                 
     Estimated number of people:<br>
