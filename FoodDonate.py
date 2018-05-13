@@ -621,5 +621,162 @@ def charityfindorderentry():
 
 
 
+@app.route('/charityquery')
+def charityquery():
+    return render_template('CharityQuery.html')
+
+
+
+@app.route('/charityqueryresult', methods=['POST', 'GET'])
+def charityqueryresult():
+    if request.method == 'POST':
+        try:
+            count = request.form['count']
+            date = request.form['date']
+
+            print(count)
+            print(date)
+            print("hey")
+
+            with sqlite3.connect("acms.db") as con:
+                con.row_factory = sqlite3.Row
+                cur = con.cursor()
+
+                if date=="null":
+                    print("hello")
+                    cur.execute("select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > ? and AvailLeftOut < ? and ExpTime > datetime('now','localtime')",(int(count)-10,int(count)+10))
+                    orderrows = cur.fetchall();
+                    print(orderrows[0][0])
+                    print(orderrows[0][1])
+                    con.commit()
+                    return render_template("CharityQueryResult.html", rows=orderrows)
+                else:
+                    print("hehe")
+                    cur.execute("select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > ? and AvailLeftOut < ? and ExpTime > ?",(int(count)-10, int(count)+10, date))
+                    orderrows = cur.fetchall();
+                    con.commit()
+                    return render_template("CharityQueryResult.html", rows=orderrows)
+
+
+        except:
+            msgDeatils = "Select Failed Please check the query / db "
+            #con.rollback()
+            return render_template("result1.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
+@app.route('/charityquerymore<hid>')
+def charityquerymore(hid):
+    try:
+        print(hid)
+        mail = session['mail']
+        print(mail)
+        con = sqlite3.connect("acms.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("select CharityAddress from Charity WHERE CharityMail='{}'".format(mail))
+        CharityAddress = cur.fetchone();
+        #print(cid)
+        print(CharityAddress[0])
+        con.close()
+
+        with sqlite3.connect("acms.db") as con:
+            cur = con.cursor()
+            cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
+            HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
+            print(HotelAddress)
+            #cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
+            #CharityAddress = cur.fetchone();
+            #print(CharityAddress)
+            return render_template('CharityQueryMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress[0])
+            con.commit()
+
+
+    except:
+        msgDeatils = "Selection Failed Please check the query / db "
+        con.rollback()
+        return render_template("result1.html", msgDeatils=msgDeatils)
+        con.close()
+    #finally:
+
+
+@app.route('/charityqueryorder<aid>')
+def charityqueryorder(aid):
+    try:
+
+        print(aid)
+        with sqlite3.connect("acms.db") as con:
+            cur = con.cursor()
+            cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress,ExpTime,Availability.AvailID from Availability natural join Hotel WHERE Availability.AvailID='{}'".format(aid))
+            HotelName, HotelPhone, HotelMail, HotelAddress,ExpTime,AvailID= cur.fetchone();
+            print(HotelName)
+
+            return render_template('CharityQueryOrder.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, ExpTime=ExpTime, AvailID=AvailID)
+            con.commit()
+
+    except:
+        msgDeatils = "Selection Failed Please check the query / db "
+        con.rollback()
+        return render_template("result1.html", msgDeatils=msgDeatils)
+        con.close()
+    #finally:
+
+
+@app.route('/charityqueryorderentry', methods=['POST', 'GET'])
+def charityqueryorderentry():
+    if request.method == 'POST':
+        try:
+            aid = request.form['aid']
+            count=request.form['count']
+            print(aid)
+            print(count)
+            mail = session['mail']
+            print(mail)
+            con = sqlite3.connect("acms.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+            cid = cur.fetchone();
+            con.commit()
+            print(cid[0])
+            cur.execute("select AvailLeftOut from Availability WHERE AvailID='{}'".format(aid))
+            apeople = cur.fetchone();
+            con.commit()
+            print(apeople[0])
+
+            print("hello1")
+
+            if int(count)>int(apeople[0]):
+                msgDeatils = "Ordered more than available"
+                return render_template("result1.html", msgDeatils=msgDeatils)
+
+            con.close()
+
+            print("hello")
+            with sqlite3.connect("acms.db") as con:
+                print("hey")
+                cur = con.cursor()
+                print("hey")
+
+                cur.execute("INSERT INTO OrderPlaced (CharityID ,AvailID ,People )VALUES(?, ?, ?)",(cid[0],aid,count) )
+                con.commit()
+                print("Order Added successfully")
+                leftout=int(apeople[0])-int(count)
+                print(leftout)
+                cur.execute('''UPDATE Availability SET AvailLeftOut = ?  WHERE AvailID = ?''',(leftout, aid))
+                con.commit()
+                print("Availability updated successfully")
+                return redirect(url_for('charity'))
+
+
+        except:
+            msgDeatils = "Insertion Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
 if __name__ == '__main__':
     app.run(debug=True)
