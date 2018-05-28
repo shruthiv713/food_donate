@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 from flask import Flask ,render_template,request
 from flask import session, redirect, url_for, escape
 import smtplib
@@ -44,6 +45,7 @@ def seemail():
                     msg['Subject'] = 'Your Food Donate Password'
                     msg['From'] = sender
                     msg['To'] = ', '.join(targets)
+					
                     server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)
                     server.login(username, password)
                     server.sendmail(sender, targets, msg.as_string())
@@ -171,38 +173,42 @@ def hoteladd():
 
 @app.route('/hoteladdentry', methods=['POST', 'GET'])
 def hoteladdentry():
-    if request.method == 'POST':
-        try:
-            count = request.form['count']
-            date = request.form['date']
-            mail = session['mail']
+	if request.method == 'POST':
+		try:
+			count = request.form['count']
+			hour = request.form.get('hour')
+			minutes=request.form.get('minutes')
+			date2 = request.form['date']
+			mail = session['mail']
+			date2+=" "+str(hour)+":"+str(minutes)+":00"
+			date=datetime.strptime(date2,"%Y-%m-%d %H:%M:%S")
             #print(count)
             #print(date)
             #print(mail)
             #print(mail)
-            con = sqlite3.connect("acms.db")
-            con.row_factory = sqlite3.Row
-            cur = con.cursor()
-            cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
-            id = cur.fetchone();
+			con = sqlite3.connect("acms.db")
+			con.row_factory = sqlite3.Row
+			cur = con.cursor()
+			cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
+			id = cur.fetchone();
             #print(id[0])
-            con.close()
+			con.close()
 
 
-            with sqlite3.connect("acms.db") as con:
-                cur = con.cursor()
-                cur.execute("INSERT INTO Availability (HotelID ,AvailPeople ,ExpTime,AvailLeftOut)VALUES(?, ?, ?, ?)",(id[0],count,date,count))
+			with sqlite3.connect("acms.db") as con:
+				cur = con.cursor()
+				cur.execute("INSERT INTO Availability (HotelID ,AvailPeople ,ExpTime,AvailLeftOut)VALUES(?, ?, ?, ?)",(id[0],count,date,count))
 
                 #msgDeatils = "Employee Added successfully"
-                con.commit()
+				con.commit()
                 #print("added")
-                return redirect(url_for('hotel'))
+				return redirect(url_for('hotel'))
 
-        except:
-            msgDeatils = "Insertion Failed Please check the query / db "
-            con.rollback()
-            return render_template("result1.html", msgDeatils=msgDeatils)
-            con.close()
+		except:
+			msgDeatils = "Insertion Failed Please check the query / db "
+			con.rollback()
+			return render_template("result1.html", msgDeatils=msgDeatils)
+			con.close()
         #finally:
 
 
@@ -629,40 +635,44 @@ def charityquery():
 
 @app.route('/charityqueryresult', methods=['POST', 'GET'])
 def charityqueryresult():
-    if request.method == 'POST':
-        try:
-            count = request.form['count']
-            date = request.form['date']
-
+	if request.method == 'POST':
+		try:
+			count = request.form['count']
+			date2 = request.form['date']
+			hour = request.form.get('hour')
+			minutes=request.form.get('minutes')
+			#print("str(hour)+" :"+str(minutes))
+			date2+=" "+str(hour)+":"+str(minutes)+":00"
+			date=datetime.strptime(date2,"%Y-%m-%d %H:%M:%S")
             #print(count)
             #print(date)
             #print("hey")
 
-            with sqlite3.connect("acms.db") as con:
-                con.row_factory = sqlite3.Row
-                cur = con.cursor()
+			with sqlite3.connect("acms.db") as con:
+				con.row_factory = sqlite3.Row
+				cur = con.cursor()
 
-                if date=="null":
+				if date=="null":
                     #print("hello")
-                    cur.execute("select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > ? and AvailLeftOut < ? and ExpTime > datetime('now','localtime')",(int(count)-10,int(count)+10))
-                    orderrows = cur.fetchall();
+					cur.execute("select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > ? and AvailLeftOut < ? and ExpTime > datetime('now','localtime')",(int(count)-10,int(count)+10))
+					orderrows = cur.fetchall();
                     #print(orderrows[0][0])
                     #print(orderrows[0][1])
-                    con.commit()
-                    return render_template("CharityQueryResult.html", rows=orderrows)
-                else:
+					con.commit()
+					return render_template("CharityQueryResult.html", rows=orderrows)
+				else:
                     #print("hehe")
-                    cur.execute("select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > ? and AvailLeftOut < ? and ExpTime > ?",(int(count)-10, int(count)+10, date))
-                    orderrows = cur.fetchall();
-                    con.commit()
-                    return render_template("CharityQueryResult.html", rows=orderrows)
+					cur.execute("select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > ? and AvailLeftOut < ? and ExpTime >= ?",(int(count)-10, int(count)+10, date))
+					orderrows = cur.fetchall();
+					con.commit()
+					return render_template("CharityQueryResult.html", rows=orderrows)
 
 
-        except:
-            msgDeatils = "Select Failed Please check the query / db "
+		except:
+			msgDeatils = "Select Failed Please check the query / db "
             #con.rollback()
-            return render_template("result1.html", msgDeatils=msgDeatils)
-            con.close()
+			return render_template("result1.html", msgDeatils=msgDeatils)
+			con.close()
         #finally:
 
 
