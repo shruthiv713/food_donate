@@ -639,6 +639,7 @@ def charityqueryresult():
 		try:
 			count = request.form['count']
 			date2 = request.form['date']
+<<<<<<< HEAD
 			if(date2==""):
 				date2=None;
 			print("ddd :")
@@ -655,14 +656,28 @@ def charityqueryresult():
 			
             #print(count)
 			
+=======
+			hour = request.form.get('hour')
+			minutes=request.form.get('minutes')
+			#print("str(hour)+" :"+str(minutes))
+			date2+=" "+str(hour)+":"+str(minutes)+":00"
+			date=datetime.strptime(date2,"%Y-%m-%d %H:%M:%S")
+            #print(count)
+            #print(date)
+>>>>>>> 8266e5acfdabd32375a331e5565a3df30d76d050
             #print("hey")
 
 			with sqlite3.connect("acms.db") as con:
 				con.row_factory = sqlite3.Row
 				cur = con.cursor()
 
+<<<<<<< HEAD
 				if date is None:
 					print("hello")
+=======
+				if date=="null":
+                    #print("hello")
+>>>>>>> 8266e5acfdabd32375a331e5565a3df30d76d050
 					cur.execute("select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > ? and AvailLeftOut < ? and ExpTime > datetime('now','localtime')",(int(count)-10,int(count)+10))
 					orderrows = cur.fetchall();
                     #print(orderrows[0][0])

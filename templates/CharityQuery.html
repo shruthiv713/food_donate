@@ -183,8 +183,11 @@
         var pass = document.myform.count.value;
          var re = /^\d{4}-(0[1-9]|1[0-2])-([0-2]\d|3[01]) ([01]\d|2[0123]):[0-5]\d:[0-5]\d$/;
          var dt=document.myform.date.value;
+<<<<<<< HEAD
 		 if(dt.value.length==0)
 		 {console.log("date is null");dt=null;}
+=======
+>>>>>>> 8266e5acfdabd32375a331e5565a3df30d76d050
         if(/^[0-9]+$/.test(pass))
         {
             
@@ -195,7 +198,14 @@
             return false;
         }
         
+<<<<<<< HEAD
          
+=======
+         if(dt=="")
+        {
+            document.myform.date.value="null";
+        }
+>>>>>>> 8266e5acfdabd32375a331e5565a3df30d76d050
         return true;
     }
             </script>
