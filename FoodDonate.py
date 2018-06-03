@@ -795,7 +795,20 @@ def charityqueryorderentry():
             return render_template("result.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
-
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+@app.route('/analytics')
+def analytics():
+    con = sqlite3.connect("acms.db")
+    con.row_factory =  dict_factory
+    cur = con.cursor()
+    cur.execute("select SUM(AvailPeople) as total,SUM(AvailLeftOut) as leftout,Hotel.HotelName ,Hotel.HotelAddress from Availability natural join Hotel group by HotelName ")
+    orderrows = cur.fetchall();
+    #print(orderrows[0]["Hotel.HotelID"])
+    return render_template("HotelAnalytics.html", rows=orderrows)
 
 if __name__ == '__main__':
     app.run(debug=True)
