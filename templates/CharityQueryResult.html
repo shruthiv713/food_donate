@@ -34,7 +34,7 @@
 }
 .but
 {
-    width: 17%;
+    width: 15%;
     height: 30%;
     padding: 10px 10px;
     margin: 5px;
@@ -71,7 +71,7 @@
     <body>
         <div class="wrapper">
             <h1 style="color:white"> Food Donate</h1>
-            <div style="width:50%">
+            <div style="width:60%">
                 <button class="but">   
      <a href="{{ url_for('charity') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
@@ -80,6 +80,9 @@
                 <button class="but">   
      <a href="{{ url_for('charityfind') }}" style="text-decoration: none;color:white">FIND HOTEL</a>
     </button>
+    <button class="but" style="background: rgb(22, 89, 214);">   
+            <a href="{{ url_for('charityquery') }}" style="text-decoration: none;color:white">QUERY</a>
+           </button>
                  <button class="but">   
      <a href="{{ url_for('charityfeedback') }}" style="text-decoration: none;color:white">FEEDBACK</a>
     </button>
