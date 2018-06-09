@@ -148,18 +148,70 @@
 .login:not(.loading) button:focus {
   border-bottom-width: 4px;
 }
+meter {
+  /* Reset the default appearance */
+  
+     -moz-appearance: none;
+          appearance: none;
 
+  margin: 0 auto 1em;
+  width: 100%;
+  height: 0.5em;
+
+  /* Applicable only to Firefox */
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
+ 
+}
+ meter[value="1"]::-webkit-meter-optimum-value { background: red; }
+meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
+meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+
+meter[value="5"]::-moz-meter-bar { background: rgb(0,100,0); }
+meter[value="1"]::-moz-meter-bar { background: red; }
+meter[value="2"]::-moz-meter-bar { background: yellow; }
+meter[value="3"]::-moz-meter-bar { background: orange; }
+meter[value="4"]::-moz-meter-bar { background: green; }
+meter[value="5"]::-moz-meter-bar { background: rgb(0,100,0); }
+meter::-webkit-meter-bar {
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
+}
 
 
         </style>
-       
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
     
     <script>
+	window.onload=function(){
+	var strength = {
+	0: "Worst",
+	1: "Bad",
+	2: "Weak",
+	3: "Good",
+	4: "Strong",
+	5:  "Very Strong"
+	}
+var password = document.getElementById('psw');
+var meter = document.getElementById('password-strength-meter');
+
+
+  password.addEventListener('input', function() {
+  var val = password.value;
+  var result = zxcvbn(val);
+
+  // Update the password strength meter
+  meter.value =result.score+1;
+  console.log(result.score+" "+result.guesses);
+  // Update the text indicator
+});}
         function validate(){
            
         var pass = document.myform.psw.value;
         var name=document.myform.name.value;
         var mob=document.myform.mob.value;
+		
         var m=/^\d{10}$/;
         var pp = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
         
@@ -186,6 +238,7 @@
         return true;
     }
         </script>
+		
         </head>
     <body style="padding-bottom:10px;margin-bottom: 10px;">
         <div class="wrapper" style="padding-bottom:10px;">
@@ -199,8 +252,9 @@
     <input type="email" placeholder="E-Mail" name="mail" id="mail" autofocus required/>
     
     <input type="password" placeholder="Password" name="psw" id="psw" required/><br>
+	<meter max="5" id="password-strength-meter"></meter>
     <input type="radio" name="category" value="hotel" checked style="width:10px; float: left; height: 10px; margin-bottom: 0px; margin-left: 0px; margin-top:0 px; margin-right: 5px; padding:5px">  Hotel
-    <br><br><input type="radio" name="category" value="orphanage"  style="width:10px; float:left; height: 10px; margin-bottom: 0px; margin-left: 0px; margin-top:0 px; margin-right: 5px; ">  Charity
+    <br><br><input type="radio" name="category" value="orphanage"  style="width:10px; float:left; height: 10px; margin-bottom: 0px; margin-left: 0px; margin-top:0 px; margin-right: 5px; ">  Orphanage
     
     <br><br><input type="submit" value="Signup" style="width: 100%;height: 100%;padding: 10px 10px;background: #2196F3;color: #fff;display: block;  border: none;  margin-top: 20px;  left: 0;  bottom: 0;  max-height: 60px;  border: 0px solid rgba(0, 0, 0, 0.1);  border-radius: 0 0 2px 2px;  transform: rotateZ(0deg);  transition: all 0.1s ease-out;">
     
