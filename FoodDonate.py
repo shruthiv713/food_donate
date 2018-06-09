@@ -1,4 +1,7 @@
 import sqlite3
+import pandas as pd
+import numpy as np
+from scipy.sparse.linalg import svds
 from datetime import datetime
 from flask import Flask ,render_template,request
 from flask import session, redirect, url_for, escape
@@ -809,6 +812,182 @@ def analytics():
     orderrows = cur.fetchall();
     #print(orderrows[0]["Hotel.HotelID"])
     return render_template("HotelAnalytics.html", rows=orderrows)
+
+
+@app.route('/charityrecommend')
+def charityrecommend():
+    con = sqlite3.connect('acms.db')
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    df = pd.read_sql_query("select OrderPlaced.CharityID,OrderPlaced.AvailID,OrderPlaced.Rating,Availability.HotelID from OrderPlaced natural join Availability where Rating is not null;",con)
+    cha = pd.read_sql_query("select CharityID from Charity ;", con)
+    hote = pd.read_sql_query("select HotelID from Hotel ;", con)
+
+    cha = cha.values
+    hote = hote.values
+
+    cha = cha.transpose()
+    hote = hote.transpose()
+
+    cha.flatten()
+    hote.flatten()
+
+    df2 = pd.DataFrame(index=cha[0], columns=hote[0], dtype=np.float64)
+    df2.fillna(0, inplace=True);
+    count = pd.DataFrame(index=cha[0], columns=hote[0], dtype=np.int32)
+    count.fillna(0, inplace=True)
+
+    for row_index, row in df.iterrows():
+        val = (count.get_value(int(row['CharityID']), int(row['HotelID'])) * df2.get_value(int(row['CharityID']),int(row['HotelID'])) + float(row['Rating'])) / (count.get_value(int(row['CharityID']), int(row['HotelID'])) + 1)
+        df2.set_value(int(row['CharityID']), int(row['HotelID']), float(val))
+        count.set_value(int(row['CharityID']), int(row['HotelID']),count.get_value(int(row['CharityID']), int(row['HotelID'])) + 1)
+
+    R = df2.as_matrix()
+    user_ratings_mean = np.mean(R, axis=1)
+    R_demeaned = R - user_ratings_mean.reshape(-1, 1)
+
+    U, sigma, Vt = svds(R_demeaned, k=5)
+
+    sigma = np.diag(sigma)
+
+    all_user_predicted_ratings = np.dot(np.dot(U, sigma), Vt) + user_ratings_mean.reshape(-1, 1)
+    preds_df = pd.DataFrame(all_user_predicted_ratings, columns=df2.columns)
+
+    mail = session['mail']
+
+    cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+    cid = cur.fetchone();
+
+    ind = np.where(cha[0] == cid)
+    sorted_user_predictions = preds_df.iloc[int(ind[0])].sort_values(ascending=False)
+
+    greaterz = sorted_user_predictions[sorted_user_predictions > 0]
+    rechot = greaterz.index
+
+    sql = "select HotelName,AvailLeftOut,ExpTime,AvailID,Hotel.HotelID from  Availability natural join Hotel where AvailLeftOut > 0 and ExpTime > datetime('now','localtime') and Hotel.HotelID in {}".format(str(tuple(rechot)))
+    cur.execute(sql)
+    orderrows = cur.fetchall();
+
+    return render_template("CharityRecommend.html", rows=orderrows)
+
+
+
+@app.route('/charityrecommendmore<hid>')
+def charityrecommendmore(hid):
+    try:
+        #print(hid)
+        mail = session['mail']
+        #print(mail)
+        con = sqlite3.connect("acms.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("select CharityAddress from Charity WHERE CharityMail='{}'".format(mail))
+        CharityAddress = cur.fetchone();
+        #print(cid)
+        #print(CharityAddress[0])
+        con.close()
+
+        with sqlite3.connect("acms.db") as con:
+            cur = con.cursor()
+            cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress from Hotel WHERE HotelID='{}'".format(hid))
+            HotelName, HotelPhone, HotelMail, HotelAddress= cur.fetchone();
+            #print(HotelAddress)
+            #cur.execute("select CharityAddress from Charity WHERE CharityID='{}'".format(cid))
+            #CharityAddress = cur.fetchone();
+            #print(CharityAddress)
+            return render_template('CharityRecommendMore.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, CharityAddress=CharityAddress[0])
+            con.commit()
+
+
+    except:
+        msgDeatils = "Selection Failed Please check the query / db "
+        con.rollback()
+        return render_template("result1.html", msgDeatils=msgDeatils)
+        con.close()
+    #finally:
+
+
+
+@app.route('/charityrecommendorder<aid>')
+def charityrecommendorder(aid):
+    try:
+
+        #print(aid)
+        with sqlite3.connect("acms.db") as con:
+            cur = con.cursor()
+            cur.execute("select HotelName,HotelPhone,HotelMail,HotelAddress,ExpTime,Availability.AvailID from Availability natural join Hotel WHERE Availability.AvailID='{}'".format(aid))
+            HotelName, HotelPhone, HotelMail, HotelAddress,ExpTime,AvailID= cur.fetchone();
+            #print(HotelName)
+
+            return render_template('CharityRecommendOrder.html', HotelName=HotelName, HotelPhone=HotelPhone, HotelMail=HotelMail, HotelAddress=HotelAddress, ExpTime=ExpTime, AvailID=AvailID)
+            con.commit()
+
+    except:
+        msgDeatils = "Selection Failed Please check the query / db "
+        con.rollback()
+        return render_template("result1.html", msgDeatils=msgDeatils)
+        con.close()
+    #finally:
+
+
+
+@app.route('/charityrecommendorderentry', methods=['POST', 'GET'])
+def charityrecommendorderentry():
+    if request.method == 'POST':
+        try:
+            aid = request.form['aid']
+            count=request.form['count']
+            #print(aid)
+            #print(count)
+            mail = session['mail']
+            #print(mail)
+            con = sqlite3.connect("acms.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select CharityID from Charity WHERE CharityMail='{}'".format(mail))
+            cid = cur.fetchone();
+            con.commit()
+            #print(cid[0])
+            cur.execute("select AvailLeftOut from Availability WHERE AvailID='{}'".format(aid))
+            apeople = cur.fetchone();
+            con.commit()
+            #print(apeople[0])
+
+            #print("hello1")
+
+            if int(count)>int(apeople[0]):
+                msgDeatils = "Ordered more than available"
+                return render_template("result1.html", msgDeatils=msgDeatils)
+
+            con.close()
+
+            #print("hello")
+            with sqlite3.connect("acms.db") as con:
+                #print("hey")
+                cur = con.cursor()
+                #print("hey")
+
+                cur.execute("INSERT INTO OrderPlaced (CharityID ,AvailID ,People )VALUES(?, ?, ?)",(cid[0],aid,count) )
+                con.commit()
+                #print("Order Added successfully")
+                leftout=int(apeople[0])-int(count)
+                #print(leftout)
+                cur.execute('''UPDATE Availability SET AvailLeftOut = ?  WHERE AvailID = ?''',(leftout, aid))
+                con.commit()
+                #print("Availability updated successfully")
+                return redirect(url_for('charity'))
+
+
+        except:
+            msgDeatils = "Insertion Failed Please check the query / db "
+            con.rollback()
+            return render_template("result.html", msgDeatils=msgDeatils)
+            con.close()
+        #finally:
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
