@@ -15,6 +15,15 @@ sender = 'donatefood4@gmail.com'
 
 app = Flask(__name__)
 app.secret_key = "any random string"
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 @app.route('/')
 def mainfun():
     return render_template('index.html')
@@ -30,7 +39,8 @@ def signup():
 
 @app.route('/forgot')
 def forgot():
-    return render_template('ForgotPassword.html')
+	if session.get('mail') == True:
+		return render_template('ForgotPassword.html')
 
 @app.route('/seemail', methods=['POST', 'GET'])
 def seemail():
@@ -157,25 +167,33 @@ def login():
 
 @app.route('/hotel')
 def hotel():
-    con = sqlite3.connect("acms.db")
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-    mail=session['mail']
+	if  session.get('mail')==None:
+		return render_template('Login.html')
+	
+	con = sqlite3.connect("acms.db")
+	con.row_factory = sqlite3.Row
+	cur = con.cursor()
+	mail=session['mail']
     #print(mail)
-    cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
-    id = cur.fetchone();
-    cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime,AvailLeftOut from Availability WHERE HotelID='{}'".format(id[0]))
-    availrows = cur.fetchall();
-    return render_template("HotelHome.html", rows=availrows)
+	cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
+	id = cur.fetchone();
+	cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime,AvailLeftOut from Availability WHERE HotelID='{}'".format(id[0]))
+	availrows = cur.fetchall();
+	return render_template("HotelHome.html", rows=availrows)
 
 
 @app.route('/hoteladd')
 def hoteladd():
-    return render_template('HotelAdd.html')
-
+	if  session.get('mail')==None:
+		return render_template('Login.html')
+	else:
+		return render_template('HotelAdd.html')
 
 @app.route('/hoteladdentry', methods=['POST', 'GET'])
 def hoteladdentry():
+	if  session.get('mail')==None:
+		return render_template('Login.html')
+	
 	if request.method == 'POST':
 		try:
 			count = request.form['count']
@@ -205,18 +223,27 @@ def hoteladdentry():
                 #msgDeatils = "Employee Added successfully"
 				con.commit()
                 #print("added")
-				return redirect(url_for('hotel'))
+				
+				if 'mail' in session:
+					return redirect(url_for('hotel'))
+				else :
+					return redirect(url_for('login'))
 
 		except:
 			msgDeatils = "Insertion Failed Please check the query / db "
 			con.rollback()
-			return render_template("result1.html", msgDeatils=msgDeatils)
+			if  session.get('mail')==None:
+				return render_template('Login.html')
+			else:
+				return render_template("result1.html", msgDeatils=msgDeatils)
 			con.close()
         #finally:
 
 
 @app.route('/hoteldelete')
 def hoteldelete():
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     con = sqlite3.connect("acms.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -229,9 +256,11 @@ def hoteldelete():
 
     return render_template('HotelDelete.html', rows=availrows)
 
-
 @app.route('/hoteldeleteentry', methods=['POST', 'GET'])
 def hoteldeleteentry():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     if request.method == 'POST':
         #print("hello")
         #print("**")
@@ -260,6 +289,9 @@ def hoteldeleteentry():
 
 @app.route('/hotelmodify')
 def hotelmodify():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')    
     con = sqlite3.connect("acms.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -275,7 +307,8 @@ def hotelmodify():
 #hotelmodifyrender
 @app.route('/hotelmodifyrender<data>')
 def hotelmodifyrender(data):
-
+    if  session.get('mail')==None:
+        return render_template('Login.html')
         try:
             #aid = request.form['Availid']
             with sqlite3.connect("acms.db") as con:
@@ -297,6 +330,9 @@ def hotelmodifyrender(data):
 
 @app.route('/hotelmodifyentry', methods=['POST', 'GET'])
 def hotelmodifyentry():
+
+    if  session.get('mail')==None:
+        return render_template('Login.html')
     if request.method == 'POST':
         try:
             id = request.form['Availid']
@@ -322,6 +358,9 @@ def hotelmodifyentry():
 
 @app.route('/hoteledit')
 def hoteledit():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     con = sqlite3.connect("acms.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -334,6 +373,8 @@ def hoteledit():
 
 @app.route('/hoteleditentry', methods=['POST', 'GET'])
 def hoteleditentry():
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     if request.method == 'POST':
         try:
             id = request.form['id']
@@ -369,6 +410,9 @@ def logout():
 
 @app.route('/charity')
 def charity():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')    
     con = sqlite3.connect("acms.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -384,6 +428,9 @@ def charity():
 
 @app.route('/charitymore<hid>')
 def charitymore(hid):
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     try:
         con = sqlite3.connect("acms.db")
         con.row_factory = sqlite3.Row
@@ -416,6 +463,9 @@ def charitymore(hid):
 
 @app.route('/charityedit')
 def charityedit():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     con = sqlite3.connect("acms.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -430,6 +480,9 @@ def charityedit():
 
 @app.route('/charityeditentry', methods=['POST', 'GET'])
 def charityeditentry():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     if request.method == 'POST':
         try:
             id = request.form['id']
@@ -459,6 +512,9 @@ def charityeditentry():
 
 @app.route('/charityfeedback')
 def charityfeedback():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     con = sqlite3.connect("acms.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -475,12 +531,18 @@ def charityfeedback():
 
 @app.route('/charityfeedbackrender<oid>')
 def charityfeedbackrender(oid):
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     return render_template('CharityFeedbackForm.html', oid=oid)
 
 
 
 @app.route('/charityfeedbackentry', methods=['POST', 'GET'])
 def charityfeedbackentry():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     if request.method == 'POST':
         try:
             oid = request.form['oid']
@@ -508,6 +570,9 @@ def charityfeedbackentry():
 
 @app.route('/charityfind')
 def charityfind():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     con = sqlite3.connect("acms.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -519,6 +584,9 @@ def charityfind():
 
 @app.route('/charityfindmore<hid>')
 def charityfindmore(hid):
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     try:
         #print(hid)
         mail = session['mail']
@@ -554,6 +622,9 @@ def charityfindmore(hid):
 
 @app.route('/charityfindorder<aid>')
 def charityfindorder(aid):
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     try:
 
         #print(aid)
@@ -576,6 +647,9 @@ def charityfindorder(aid):
 
 @app.route('/charityfindorderentry', methods=['POST', 'GET'])
 def charityfindorderentry():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     if request.method == 'POST':
         try:
             aid = request.form['aid']
@@ -632,12 +706,18 @@ def charityfindorderentry():
 
 @app.route('/charityquery')
 def charityquery():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     return render_template('CharityQuery.html')
 
 
 
 @app.route('/charityqueryresult', methods=['POST', 'GET'])
 def charityqueryresult():
+
+	if  session.get('mail')==None:
+		return render_template('Login.html')
 	if request.method == 'POST':
 		try:
 			count = request.form['count']
@@ -690,6 +770,9 @@ def charityqueryresult():
 
 @app.route('/charityquerymore<hid>')
 def charityquerymore(hid):
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     try:
         #print(hid)
         mail = session['mail']
@@ -725,6 +808,9 @@ def charityquerymore(hid):
 
 @app.route('/charityqueryorder<aid>')
 def charityqueryorder(aid):
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     try:
 
         #print(aid)
@@ -747,6 +833,9 @@ def charityqueryorder(aid):
 
 @app.route('/charityqueryorderentry', methods=['POST', 'GET'])
 def charityqueryorderentry():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     if request.method == 'POST':
         try:
             aid = request.form['aid']
@@ -816,6 +905,9 @@ def analytics():
 
 @app.route('/charityrecommend')
 def charityrecommend():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     con = sqlite3.connect('acms.db')
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -875,6 +967,9 @@ def charityrecommend():
 
 @app.route('/charityrecommendmore<hid>')
 def charityrecommendmore(hid):
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     try:
         #print(hid)
         mail = session['mail']
@@ -911,6 +1006,9 @@ def charityrecommendmore(hid):
 
 @app.route('/charityrecommendorder<aid>')
 def charityrecommendorder(aid):
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     try:
 
         #print(aid)
@@ -934,6 +1032,9 @@ def charityrecommendorder(aid):
 
 @app.route('/charityrecommendorderentry', methods=['POST', 'GET'])
 def charityrecommendorderentry():
+
+    if  session.get('mail')==None:
+	    return render_template('Login.html')
     if request.method == 'POST':
         try:
             aid = request.form['aid']
