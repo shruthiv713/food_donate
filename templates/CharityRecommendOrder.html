@@ -206,53 +206,52 @@
   <button class="but">   
      <a href="{{ url_for('charity') }}" style="text-decoration: none;color:white">HOME</a>
     </button>
-               <button class="but">   
-     <a href="{{ url_for('charityfind') }}" style="text-decoration: none;color:white">FIND HOTEL</a>
-    </button>
-                <button class="but">   
+    <button class="but" >   
+        <a href="{{ url_for('charityfind') }}" style="text-decoration: none;color:white">FIND HOTEL</a>
+       </button>
+  <button class="but">   
      <a href="{{ url_for('charityquery') }}" style="text-decoration: none;color:white">QUERY</a>
     </button>
-    <button class="but">   
-      <a href="{{ url_for('charityrecommend') }}" style="text-decoration: none;color:white">RECOMMEND</a>
-     </button>    
-                <button class="but">   
-      <a href="{{ url_for('charityfeedback') }}" style="text-decoration: none;color:white">FEEDBACK</a>
-    </button>
     <button class="but" style="background: rgb(22, 89, 214);">   
-        <a href="{{ url_for('charityedit') }}" style="text-decoration: none;color:white">EDIT</a>
-      </button>
+      <a href="{{ url_for('charityrecommend') }}" style="text-decoration: none;color:white">RECOMMEND</a>
+     </button>
+                <button class="but">   
+     <a href="{{ url_for('charityfeedback') }}" style="text-decoration: none;color:white">FEEDBACK</a>
+    </button>
+                <button class="but">   
+      <a href="{{ url_for('charityedit') }}" style="text-decoration: none;color:white">EDIT</a>
+    </button>
                 <button class="but">   
       <a href="{{ url_for('logout') }}" style="text-decoration: none;color:white">LOGOUT</a>
-                </button>
+    </button>
             </div>
             <br>
             <br>
-            <form class="login" action="{{ url_for('charityeditentry') }}" method="POST" name="myform" style="padding-bottom:20px" onsubmit="return validate()">
-                <p class="title">Edit Profile</p>
+            <form class="login" action="{{url_for('charityfindorderentry')}}" method="POST" name="myform" style="padding-bottom:20px" onsubmit="return validate()">
+                <p class="title">Order</p>
+                <h4>HOTEL DETAILS</h4>
+       <p style="font-size:100%">Name: {{HotelName}}
+           
+           <br>Mail: {{HotelMail}}
+           <br>Phone: {{HotelPhone}}
+           <br>Address: {{HotelAddress}}
+           <br></p>
+       
+       
+       <p style="font-size:100%">Expiry Time: {{ExpTime}}</p>
+       
                 
-    Name:<br>
+    Estimated number of people:<br>
     <br>
-    <input type="text" value="{{row.CharityName}}" name="name" required autofocus/>
+    <input type="text" name="count" placeholder="Estimated number of people" autofocus/>
     <br>
-    E-Mail:<br>
-    <br>
-     <input type="email" value="{{row.CharityMail}}" name="mail"  required/>
-     <br>
-    Phone:<br>
-    <br>
-     <input type="text" value="{{row.CharityPhone}}" name="mob"  required/>
-     <br>
-    Password:<br>
-    <br>
-     <input type="password" value="{{row.CharityPassword}}" name="pass"  required/>
-     <br>
-    Address:<br>
-    <br>
-     <input type="text" value="{{row.CharityAddress}}" name="addr"  required/>
-     <input type="hidden" value="{{row.CharityID}}" name="id"  required/>
-     <input type="submit" value="Save" style="width: 100%;height: 100%;padding: 10px 10px;background: #2196F3;color: #fff;display: block;  border: none;  margin-top: 20px;  left: 0;  bottom: 0;  max-height: 60px;  border: 0px solid rgba(0, 0, 0, 0.1);  border-radius: 0 0 2px 2px;  transform: rotateZ(0deg);  transition: all 0.1s ease-out;">
-    
+     <input type="hidden" value="{{AvailID}}" name="aid" />
+     <input type="submit" value="Place Order" style="width: 100%;height: 100%;padding: 10px 10px;background: #2196F3;color: #fff;display: block;  border: none;  margin-top: 20px;  left: 0;  bottom: 0;  max-height: 60px;  border: 0px solid rgba(0, 0, 0, 0.1);  border-radius: 0 0 2px 2px;  transform: rotateZ(0deg);  transition: all 0.1s ease-out;">
+     <br>Note*:Cancellation of order not allowed once the order is placed. <br>
   </form>
+   <button style="width: 25%;height: 100%;padding: 10px 10px; margin-top: 10px;background: #2196F3;color: #fff;display: block;  border: none;  left: 0;  bottom: 0;  max-height: 60px;  border: 0px solid rgba(0, 0, 0, 0.1);  border-radius: 0 0 2px 2px;  transform: rotateZ(0deg);  transition: all 0.1s ease-out;border-bottom-width: 7px;">   
+      <span class=""><a href="{{ url_for('charity') }}" style="text-decoration: none;color:white">Back</a></span>
+    </button>
             <br>
 </div>
     </body>
