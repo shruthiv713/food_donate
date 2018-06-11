@@ -309,22 +309,22 @@ def hotelmodify():
 def hotelmodifyrender(data):
     if  session.get('mail')==None:
         return render_template('Login.html')
-        try:
-            #aid = request.form['Availid']
-            with sqlite3.connect("acms.db") as con:
-                cur = con.cursor()
-                cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE AvailID='{}'".format(data))
-                id,people,dt,et= cur.fetchone();
-                #p=str(people)
-                return render_template('HotelModifyForm.html', id=id,people=people,dt=dt,et=et)
-                con.commit()
+    try:
+        #aid = request.form['Availid']
+        with sqlite3.connect("acms.db") as con:
+            cur = con.cursor()
+            cur.execute("select AvailID,AvailPeople,AvailDT,ExpTime from Availability WHERE AvailID='{}'".format(data))
+            id,people,dt,et= cur.fetchone();
+            #p=str(people)
+            return render_template('HotelModifyForm.html', id=id,people=people,dt=dt,et=et)
+            con.commit()
 
-        except:
-            msgDeatils = "Selection Failed Please check the query / db "
-            con.rollback()
-            return render_template("result1.html", msgDeatils=msgDeatils)
-            con.close()
-        #finally:
+    except:
+        msgDeatils = "Selection Failed Please check the query / db "
+        con.rollback()
+        return render_template("result1.html", msgDeatils=msgDeatils)
+        con.close()
+    #finally:
 
 
 
