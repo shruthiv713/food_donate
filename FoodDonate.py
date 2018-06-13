@@ -887,6 +887,8 @@ def charityqueryorderentry():
             return render_template("result.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
+
+
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
