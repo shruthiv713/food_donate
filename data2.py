@@ -105,7 +105,7 @@ sorted_user_predictions = preds_df.iloc[int(ind[0])].sort_values(ascending=False
 
 print(sorted_user_predictions)
 
-greaterz=sorted_user_predictions[sorted_user_predictions>0]
+greaterz=sorted_user_predictions[sorted_user_predictions> 0]
 
 print(greaterz.__class__)
 
