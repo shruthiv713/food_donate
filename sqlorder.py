@@ -12,10 +12,6 @@ conn.execute('''CREATE TABLE Availability
          FOREIGN KEY(HotelID) REFERENCES Hotel(HotelID));''')
 print("Table created successfully");
 
-
-
-
-
 print("Opened database successfully")
 conn.execute('''CREATE TABLE OrderPlaced
         (OrderID INTEGER PRIMARY KEY  AUTOINCREMENT,
