@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a00f23a9-7e4f-44dc-8c8a-c79960f44f8c" name="Default" comment="" />
+    <list default="true" id="a00f23a9-7e4f-44dc-8c8a-c79960f44f8c" name="Default" comment="back button sent to charity find">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodDonate.py" beforeDir="false" afterPath="$PROJECT_DIR$/FoodDonate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acms.db" beforeDir="false" afterPath="$PROJECT_DIR$/acms.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/CharityFindHotelOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/CharityFindHotelOrder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/HotelAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/HotelAdd.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,11 +21,11 @@
     <SUITE FILE_PATH="coverage/food_donate$enter.coverage" NAME="enter Coverage Results" MODIFIED="1525536672490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/food_donate$data.coverage" NAME="data Coverage Results" MODIFIED="1528305667905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/food_donate$rename.coverage" NAME="rename Coverage Results" MODIFIED="1525941381811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/food_donate$data2.coverage" NAME="data2 Coverage Results" MODIFIED="1528385806197" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/food_donate$data2.coverage" NAME="data2 Coverage Results" MODIFIED="1528916997482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/food_donate$delete.coverage" NAME="delete Coverage Results" MODIFIED="1525520123214" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/food_donate$FoodDonate.coverage" NAME="FoodDonate Coverage Results" MODIFIED="1528305467463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/food_donate$sqlorder.coverage" NAME="sqlorder Coverage Results" MODIFIED="1525535946551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/food_donate$FoodDonate.coverage" NAME="FoodDonate Coverage Results" MODIFIED="1528916800262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/food_donate$chrome.coverage" NAME="chrome Coverage Results" MODIFIED="1527341420075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Downloads" />
+    <SUITE FILE_PATH="coverage/food_donate$sqlorder.coverage" NAME="sqlorder Coverage Results" MODIFIED="1528917117658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -53,71 +59,95 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="enter.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="12" selection-start-line="12" selection-end-line="12" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HotelAnalytics.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/HotelAnalytics.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="25" column="36" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data2.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/data2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orderplaced" pinned="false" current-in-tab="false">
-        <entry file="das://e488a766-2a96-48c4-9d0f-7849c2fdd1b9/schema/main/table/orderplaced">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodDonate.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FoodDonate.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="359" lean-forward="true" selection-start-line="359" selection-end-line="359" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="hotel" pinned="false" current-in-tab="false">
         <entry file="das://e488a766-2a96-48c4-9d0f-7849c2fdd1b9/schema/main/table/hotel">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FoodDonate.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/FoodDonate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="970" column="40" lean-forward="true" selection-start-line="970" selection-start-column="40" selection-end-line="970" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HotelAdd.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/HotelAdd.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="215" column="36" selection-start-line="215" selection-start-column="36" selection-end-line="215" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharityQuery.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/CharityQuery.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3264">
+              <caret line="192" column="12" selection-start-line="192" selection-start-column="12" selection-end-line="192" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharityQueryResult.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/CharityQueryResult.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1955">
+              <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharityQueryOrder.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/CharityQueryOrder.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="225" column="13" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HotelModify.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/HotelModify.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1972">
+              <caret line="116" column="47" selection-start-line="116" selection-start-column="47" selection-end-line="116" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="charity" pinned="false" current-in-tab="false">
+        <entry file="das://e488a766-2a96-48c4-9d0f-7849c2fdd1b9/schema/main/table/charity">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="107" column="59" selection-start-line="107" selection-start-column="59" selection-end-line="107" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharityRecommendMore.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/CharityRecommendMore.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2312">
+              <caret line="136" column="9" selection-start-line="136" selection-start-column="9" selection-end-line="136" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -153,7 +183,6 @@
         <option value="$PROJECT_DIR$/rename.py" />
         <option value="$PROJECT_DIR$/templates/HotelHome.html" />
         <option value="$PROJECT_DIR$/modify.py" />
-        <option value="$PROJECT_DIR$/sqlorder.py" />
         <option value="$PROJECT_DIR$/templates/HotelModify.html" />
         <option value="$PROJECT_DIR$/templates/CharityHome.html" />
         <option value="$PROJECT_DIR$/templates/CharityFindHotel.html" />
@@ -162,7 +191,6 @@
         <option value="$PROJECT_DIR$/templates/CharityEdit.html" />
         <option value="$PROJECT_DIR$/templates/CharityFindHotelMore.html" />
         <option value="$PROJECT_DIR$/templates/CharityQueryMore.html" />
-        <option value="$PROJECT_DIR$/templates/CharityFindHotelOrder.html" />
         <option value="$PROJECT_DIR$/templates/CharityQueryOrder.html" />
         <option value="$PROJECT_DIR$/templates/CharityQuery.html" />
         <option value="$PROJECT_DIR$/templates/CharityQueryResult.html" />
@@ -170,6 +198,11 @@
         <option value="$PROJECT_DIR$/templates/Login.html" />
         <option value="$PROJECT_DIR$/templates/Signup.html" />
         <option value="$PROJECT_DIR$/data.py" />
+        <option value="$PROJECT_DIR$/templates/CharityRecommend.html" />
+        <option value="$PROJECT_DIR$/templates/CharityRecommendMore.html" />
+        <option value="$PROJECT_DIR$/templates/CharityFindHotelOrder.html" />
+        <option value="$PROJECT_DIR$/templates/CharityRecommendOrder.html" />
+        <option value="$PROJECT_DIR$/sqlorder.py" />
         <option value="$PROJECT_DIR$/FoodDonate.py" />
         <option value="$PROJECT_DIR$/data2.py" />
       </list>
@@ -181,7 +214,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1750" />
@@ -206,6 +239,14 @@
               <item name="food_donate" type="b2602c69:ProjectViewProjectNode" />
               <item name="food_donate" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="food_donate" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="food_donate" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
           <select />
@@ -239,7 +280,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.data2">
+  <component name="RunManager" selected="Python.sqlorder">
     <configuration name="FoodDonate" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="food_donate" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -316,7 +357,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="modify" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="sqlorder" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="food_donate" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -329,7 +370,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modify.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sqlorder.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -494,18 +535,18 @@
     <list>
       <item itemvalue="Flask server.food_donate" />
       <item itemvalue="Python.FoodDonate" />
-      <item itemvalue="Python.modify" />
       <item itemvalue="Python.chrome" />
       <item itemvalue="Python.data" />
       <item itemvalue="Python.data2" />
+      <item itemvalue="Python.sqlorder" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.sqlorder" />
         <item itemvalue="Python.data2" />
-        <item itemvalue="Python.data" />
         <item itemvalue="Python.FoodDonate" />
+        <item itemvalue="Python.data" />
         <item itemvalue="Python.chrome" />
-        <item itemvalue="Python.modify" />
       </list>
     </recent_temporary>
   </component>
@@ -519,118 +560,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1525421418325</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Charity edit working and tested">
-      <created>1525936174213</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1525936174214</updated>
-    </task>
-    <task id="LOCAL-00064" summary="AvailLeftOut column added into Availability table&#10;Used Column changed into Remaining column in order">
-      <created>1525955621742</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1525955621742</updated>
-    </task>
-    <task id="LOCAL-00065" summary="AvailLeftOut column added into Availability table&#10;Used Column changed into Remaining column in order">
-      <created>1525955651781</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1525955651781</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Fuctionality of AvailLeftOut and Remaining column is working">
-      <created>1525955703873</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1525955703873</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Fuctionality of AvailLeftOut and Remaining column is working">
-      <created>1525955712740</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1525955712740</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Rating added into order table">
-      <created>1525967681754</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1525967681754</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Rating added into order table">
-      <created>1525967690733</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1525967690733</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Feedback is working and tested">
-      <created>1525967715433</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1525967715433</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Feedback is working and tested">
-      <created>1525967727329</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1525967727329</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Feedback is working and tested">
-      <created>1525967736636</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1525967736636</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Feedback is working and tested">
-      <created>1525967744558</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1525967744558</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Charity Find Hotel is working properly and tested">
-      <created>1525984824190</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1525984824191</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Charity Find Hotel is working properly and tested">
-      <created>1525984836567</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1525984836567</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Charity Find Hotel is working properly and tested">
-      <created>1525984852331</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1525984852331</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Charity Find Hotel is working properly and tested">
-      <created>1525984863217</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1525984863217</updated>
-    </task>
-    <task id="LOCAL-00078" summary="Charity Find Hotel is working properly and tested">
-      <created>1525984870738</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1525984870738</updated>
     </task>
     <task id="LOCAL-00079" summary="Charity Find Hotel is working properly and tested">
       <created>1525984879989</created>
@@ -863,27 +792,138 @@
       <option name="project" value="LOCAL" />
       <updated>1528040136449</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="test">
+      <created>1528393954513</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1528393954513</updated>
+    </task>
+    <task id="LOCAL-00113" summary="recommandation">
+      <created>1528532637297</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1528532637298</updated>
+    </task>
+    <task id="LOCAL-00114" summary="recommandation">
+      <created>1528532647574</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1528532647574</updated>
+    </task>
+    <task id="LOCAL-00115" summary="recommendation system implemented and tested">
+      <created>1528536465708</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1528536465708</updated>
+    </task>
+    <task id="LOCAL-00116" summary="recommendation system implemented and tested">
+      <created>1528536478458</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1528536478459</updated>
+    </task>
+    <task id="LOCAL-00117" summary="recommendation system implemented and tested">
+      <created>1528536486169</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1528536486169</updated>
+    </task>
+    <task id="LOCAL-00118" summary="recommendation system implemented and tested">
+      <created>1528536508050</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1528536508050</updated>
+    </task>
+    <task id="LOCAL-00119" summary="recommendation system implemented and tested">
+      <created>1528536517190</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1528536517190</updated>
+    </task>
+    <task id="LOCAL-00120" summary="recommendation system implemented and tested">
+      <created>1528536527612</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1528536527612</updated>
+    </task>
+    <task id="LOCAL-00121" summary="back button sent to charity find">
+      <created>1528536559077</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1528536559077</updated>
+    </task>
+    <task id="LOCAL-00122" summary="modify error corrected">
+      <created>1528740131798</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1528740131798</updated>
+    </task>
+    <task id="LOCAL-00123" summary="back button sent to charity find">
+      <created>1528740140039</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1528740140039</updated>
+    </task>
+    <task id="LOCAL-00124" summary="data entry added">
+      <created>1528917080321</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1528917080322</updated>
+    </task>
+    <task id="LOCAL-00125" summary="data entry added">
+      <created>1528917096117</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1528917096117</updated>
+    </task>
+    <task id="LOCAL-00126" summary="data entry added">
+      <created>1528917114481</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1528917114481</updated>
+    </task>
+    <task id="LOCAL-00127" summary="data entry added">
+      <created>1528917136801</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1528917136801</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1400" height="776" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.50390625" side_tool="true" weight="0.32968536" />
+      <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.5260417" side_tool="true" weight="0.33242133" />
       <window_info anchor="bottom" id="Database Changes" order="11" weight="0.32968536" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.47981772" weight="0.33632287" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49609375" weight="0.32968536" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.47395834" weight="0.33242133" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49414062" weight="0.32968536" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Terminal" order="13" weight="0.32968536" />
-      <window_info anchor="bottom" id="Database Console" order="0" sideWeight="0.49544272" visible="true" weight="0.32884902" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22510822" />
+      <window_info anchor="bottom" id="Database Console" order="0" sideWeight="0.49283853" weight="0.3009576" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.203125" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.22438672" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.20247395" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.3994528" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -902,12 +942,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="charity more working properly and tested" />
-    <MESSAGE value="hotel edit profile working and tested" />
-    <MESSAGE value="hotel edit path added" />
-    <MESSAGE value="hotel edit path added and working and tested" />
-    <MESSAGE value="Charity edit working and tested" />
-    <MESSAGE value="AvailLeftOut column added into Availability table&#10;Used Column changed into Remaining column in order" />
     <MESSAGE value="Fuctionality of AvailLeftOut and Remaining column is working" />
     <MESSAGE value="Rating added into order table" />
     <MESSAGE value="Feedback is working and tested" />
@@ -927,11 +961,15 @@
     <MESSAGE value="charity query working properly and tested" />
     <MESSAGE value="commented all the print statements" />
     <MESSAGE value="orphanage changed to charity" />
-    <option name="LAST_COMMIT_MESSAGE" value="orphanage changed to charity" />
+    <MESSAGE value="test" />
+    <MESSAGE value="recommandation" />
+    <MESSAGE value="recommendation system implemented and tested" />
+    <MESSAGE value="modify error corrected" />
+    <MESSAGE value="back button sent to charity find" />
+    <MESSAGE value="data entry added" />
+    <option name="LAST_COMMIT_MESSAGE" value="data entry added" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://b06138f6-06b9-4bbf-b425-14bed4023d2c/schema/main/table/hotel.sql" />
-    <entry file="das://b06138f6-06b9-4bbf-b425-14bed4023d2c/schema/main/table/availability" />
     <entry file="das://b06138f6-06b9-4bbf-b425-14bed4023d2c/schema/main/table/availability" />
     <entry file="das://b06138f6-06b9-4bbf-b425-14bed4023d2c/schema/main/table/availability" />
     <entry file="das://b06138f6-06b9-4bbf-b425-14bed4023d2c/schema/main/table/availability" />
@@ -985,20 +1023,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sqlhotel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sqlorder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="62" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/HotelModifyForm.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -1010,20 +1034,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="428">
           <caret line="110" column="39" selection-start-line="110" selection-start-column="39" selection-end-line="110" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/HotelAdd.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="215" column="36" selection-start-line="215" selection-start-column="36" selection-end-line="215" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/HotelModify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="116" column="54" selection-start-line="116" selection-start-column="54" selection-end-line="116" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -1077,31 +1087,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/CharityQueryOrder.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="225" column="38" lean-forward="true" selection-start-line="225" selection-start-column="38" selection-end-line="225" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/CharityFindHotelMore.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="134" column="71" lean-forward="true" selection-start-line="134" selection-start-column="43" selection-end-line="134" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/CharityQueryMore.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
           <caret line="134" column="21" lean-forward="true" selection-start-line="134" selection-start-column="21" selection-end-line="134" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/CharityQueryResult.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="115" column="43" selection-start-line="115" selection-start-column="43" selection-end-line="115" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -1143,10 +1132,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/CharityFindHotelOrder.html">
+    <entry file="file://$PROJECT_DIR$/data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="53" column="22" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/HotelAnalytics.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="223" column="76" selection-start-line="223" selection-start-column="40" selection-end-line="223" selection-end-column="76" />
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1157,58 +1153,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/CharityQuery.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3264">
-          <caret line="192" column="12" selection-start-line="192" selection-start-column="12" selection-end-line="192" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/HotelAnalytics.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e488a766-2a96-48c4-9d0f-7849c2fdd1b9/schema/main/table/charity">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://e488a766-2a96-48c4-9d0f-7849c2fdd1b9/schema/main/table/availability">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e488a766-2a96-48c4-9d0f-7849c2fdd1b9/schema/main/table/hotel">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="25" column="36" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/acms.db">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FoodDonate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="359" lean-forward="true" selection-start-line="359" selection-end-line="359" />
         </state>
       </provider>
     </entry>
@@ -1219,12 +1167,117 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/CharityFindHotelMore.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="139" column="30" lean-forward="true" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/CharityRecommend.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1445">
+          <caret line="85" column="45" selection-start-line="85" selection-start-column="36" selection-end-line="85" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/CharityRecommendMore.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2312">
+          <caret line="136" column="9" selection-start-line="136" selection-start-column="9" selection-end-line="136" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/CharityRecommendOrder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3893">
+          <caret line="229" column="67" selection-start-line="229" selection-start-column="67" selection-end-line="229" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/HotelModify.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1972">
+          <caret line="116" column="47" selection-start-line="116" selection-start-column="47" selection-end-line="116" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sqlhotel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/CharityQuery.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3264">
+          <caret line="192" column="12" selection-start-line="192" selection-start-column="12" selection-end-line="192" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/CharityQueryResult.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1955">
+          <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sqlorder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/CharityQueryOrder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="225" column="13" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e488a766-2a96-48c4-9d0f-7849c2fdd1b9/schema/main/table/hotel">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e488a766-2a96-48c4-9d0f-7849c2fdd1b9/schema/main/table/charity">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data2.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="107" column="59" selection-start-line="107" selection-start-column="59" selection-end-line="107" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/CharityFindHotelOrder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="252" column="53" selection-start-line="252" selection-start-column="53" selection-end-line="252" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/HotelAdd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="215" column="36" selection-start-line="215" selection-start-column="36" selection-end-line="215" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FoodDonate.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <caret line="970" column="40" lean-forward="true" selection-start-line="970" selection-start-column="40" selection-end-line="970" selection-end-column="40" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
