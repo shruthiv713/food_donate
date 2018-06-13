@@ -195,28 +195,27 @@ def hoteladdentry():
 		return render_template('Login.html')
 	
 	if request.method == 'POST':
-		
-		count = request.form['count']
-		hour = request.form.get('hour')
-		minutes=request.form.get('minutes')
-		date2 = request.form['date']
-		date2=str(date2)
-		mail = session['mail']
-		date2+=" "+str(hour)+":"+str(minutes)+":00"
-		date=datetime.strptime(date2,"%Y-%m-%d %H:%M:%S")
+		try:
+			count = request.form['count']
+			hour = request.form.get('hour')
+			minutes=request.form.get('minutes')
+			date2 = request.form['date']
+			mail = session['mail']
+			date2+=" "+str(hour)+":"+str(minutes)+":00"
+			date=datetime.strptime(date2,"%Y-%m-%d %H:%M:%S")
             #print(count)
             #print(date)
             #print(mail)
             #print(mail)
-		con = sqlite3.connect("acms.db")
-		con.row_factory = sqlite3.Row
-		cur = con.cursor()
-		cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
-		id = cur.fetchone();
+			con = sqlite3.connect("acms.db")
+			con.row_factory = sqlite3.Row
+			cur = con.cursor()
+			cur.execute("select HotelID from Hotel WHERE HotelMail='{}'".format(mail))
+			id = cur.fetchone();
             #print(id[0])
-		con.close()
+			con.close()
 
-		try:
+
 			with sqlite3.connect("acms.db") as con:
 				cur = con.cursor()
 				cur.execute("INSERT INTO Availability (HotelID ,AvailPeople ,ExpTime,AvailLeftOut)VALUES(?, ?, ?, ?)",(id[0],count,date,count))
@@ -888,8 +887,6 @@ def charityqueryorderentry():
             return render_template("result.html", msgDeatils=msgDeatils)
             con.close()
         #finally:
-
-
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
