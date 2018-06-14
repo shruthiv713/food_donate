@@ -39,8 +39,7 @@ def signup():
 
 @app.route('/forgot')
 def forgot():
-	if session.get('mail') == True:
-		return render_template('ForgotPassword.html')
+	return render_template('ForgotPassword.html')
 
 @app.route('/seemail', methods=['POST', 'GET'])
 def seemail():
